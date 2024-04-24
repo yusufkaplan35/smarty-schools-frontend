@@ -10,7 +10,7 @@ const Topbar = () => {
             <div className="slogan">
                 📢 {config.project.slogan} 
             </div>
-            <span>MENU</span>
+            <span>LOGIN</span>
         </Container>
     </div>
   )
