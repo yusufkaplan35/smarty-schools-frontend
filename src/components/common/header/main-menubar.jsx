@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import { Container, Navbar, Offcanvas } from "react-bootstrap";
 import Logo from "./logo";
@@ -18,14 +18,13 @@ const MainMenuBar = () => {
 				>
 					<Offcanvas.Header closeButton>
 						<Offcanvas.Title id="main-menu-label">
-            <Logo />
+							<Logo />
 						</Offcanvas.Title>
 					</Offcanvas.Header>
 					<Offcanvas.Body>
 						<MainMenu className="justify-content-center flex-grow-1 pe-3" />
-						
-            <ButtonCallNow/>
-            
+
+						<ButtonCallNow />
 					</Offcanvas.Body>
 				</Navbar.Offcanvas>
 			</Container>
