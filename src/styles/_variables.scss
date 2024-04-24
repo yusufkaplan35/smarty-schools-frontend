@@ -1,0 +1,12 @@
+/* COMMON */
+$color1: rgb(243, 113, 47);
+$color2: rgb(47, 47, 46);
+$color3: rgb(230, 230, 230);
+$color1-op-50: rgba($color1, 0.5);
+$color2-op-50: rgba($color2, 0.5);
+
+
+/* BOOTSTRAP */
+$font-family-sans-serif: var(--font-montserrat);
+$primary: $color1;
+$secondary: $color2;
