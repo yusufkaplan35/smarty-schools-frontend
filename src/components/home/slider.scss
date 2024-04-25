@@ -1,0 +1,23 @@
+@use "../../styles/mixins" as m;
+
+.main-slider{
+    .carousel-item{
+        height: calc(100vh - 160px);
+    }
+
+    .carousel-caption{
+        bottom: 50%;
+        @include m.transform(translateY(50%));
+}
+
+    img{
+        width:100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: left top;
+
+        @media(min-width: 850px){
+            object-position: right top;
+        }
+    }
+}

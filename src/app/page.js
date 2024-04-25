@@ -1,6 +1,9 @@
+import Slider from "@/components/home/slider";
 
 export default function Home() {
   return (
-    <>Hello Smarty Schools</>
+    <>
+      <Slider/>
+    </>
   );
 }
