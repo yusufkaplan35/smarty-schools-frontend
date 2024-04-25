@@ -1,0 +1,13 @@
+@use "../../styles/variables" as v;
+
+.featured-courses{
+    background-color: v.$color3;
+    padding: 100px 0;
+
+    h2{
+        text-align: center;
+        color: v.$color1;
+        margin-bottom: 50px;
+        font-size: 2.1rem;
+    }
+}
