@@ -1,13 +1,12 @@
 @use "../../../styles/variables" as v;
+@use "../../../styles/mixins" as m;
 
 .topbar{
     background-color: v.$color2;
     color: v.$color3;
 
     .container{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        @include m.flex($ai:center);
         padding-top: 10px;
         padding-bottom: 10px;
     }
