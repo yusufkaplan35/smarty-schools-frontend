@@ -6,6 +6,9 @@ import events from "@/helpers/data/events.json";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import "./upcoming-events.scss";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+import "swiper/css";
+import EventCard from "./event-card";
 
 const upcomingEvents = events.filter(
 	(item) => new Date(item.date) >= new Date()
@@ -16,23 +19,38 @@ const UpcomingEvents = () => {
 		<div className="upcoming-events">
 			<Container>
 				<div className="title">
-					<span>
+					<span className="prev">
 						<FaChevronLeft />
 					</span>
 					<SectionTitle>Upcoming Events</SectionTitle>
-					<span>
+					<span className="next">
 						<FaChevronRight />
 					</span>
 				</div>
 
 				<Swiper
+					modules={[Navigation]}
 					spaceBetween={50}
-					slidesPerView={3}
+					slidesPerView={1}
 					onSlideChange={() => console.log("slide change")}
 					onSwiper={(swiper) => console.log(swiper)}
+					breakpoints={{
+						576: {
+							slidesPerView: 2
+						},
+						992:{
+							slidesPerView: 3
+						}
+					}}
+					navigation={{
+						prevEl: ".prev",
+						nextEl: ".next"
+					}}
 				>
 					{upcomingEvents.map((item) => (
-						<SwiperSlide key={item.id}>Slide 1</SwiperSlide>
+						<SwiperSlide key={item.id}>
+							<EventCard {...item}/>
+						</SwiperSlide>
 					))}
 				</Swiper>
 			</Container>
