@@ -1,0 +1,11 @@
+@use "../../styles/mixins" as m;
+.upcoming-events{
+
+    .section-title{
+        margin: 0;
+    }
+
+    .title{
+        @include m.flex($ai: center)
+    }
+}
