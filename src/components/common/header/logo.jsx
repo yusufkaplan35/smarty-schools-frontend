@@ -9,8 +9,8 @@ const Logo = ({ type = "dark" }) => {
 		<NavbarBrand href="/" as={Link}>
 			<Image
 				src={`/images/logo/logo-${type}.png`}
-				width={230}
-				height={103}
+				width={199}
+				height={69}
 				alt={config.project.name}
 			/>
 		</NavbarBrand>

@@ -1,22 +1,27 @@
 [
 	{
 		"title": "Home",
-		"link": "/"
+		"link": "/",
+		"icon": "AiOutlineHome"
 	},
 	{
 		"title": "Courses",
-		"link": "/courses"
+		"link": "/courses",
+		"icon": "AiFillForward"
 	},
 	{
 		"title": "Events",
-		"link": "/events"
+		"link": "/events",
+		"icon": "AiOutlineCalendar"
 	},
 	{
 		"title": "About",
-		"link": "/about"
+		"link": "/about",
+		"icon": "AiOutlineInfoCircle"
 	},
 	{
 		"title": "Contact",
-		"link": "/contact"
+		"link": "/contact",
+		"icon": "AiOutlineAliwangwang"
 	}
 ]
