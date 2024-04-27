@@ -13,7 +13,7 @@ export const createContactMessageAction = async (prevState, formData) => {
 	try {
 		const fields = convertFormDataToJSON(formData);
 
-		//ContactSchema.validateSync(fields, { abortEarly: false });
+		ContactSchema.validateSync(fields, { abortEarly: false });
 
 		const res = await createContactMessage(fields);
 		const data = await res.json();
