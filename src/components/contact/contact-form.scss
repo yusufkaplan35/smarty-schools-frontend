@@ -1,0 +1,12 @@
+@use "../../styles/variables" as v;
+
+.contact-form{
+    h2{
+        margin-bottom: 20px;
+    }
+
+    .input-group-text{
+        background: none;
+        color: v.$color1;
+    }
+}
