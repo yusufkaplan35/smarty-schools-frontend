@@ -1,0 +1,11 @@
+@use "../../styles/mixins" as m;
+@use "../../styles/variables" as v;
+
+.contact{
+    .card{
+        @include m.shadow(box, 0 5px 10px v.$color2);
+        @include m.transform(translateY(50px));
+        margin-top: -50px;
+        padding:30px;
+    }
+}

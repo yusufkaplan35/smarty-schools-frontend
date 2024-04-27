@@ -9,10 +9,10 @@ const AboutPage = () => {
 		<>
 			<PageHeader>About us</PageHeader>
 			<Spacer height={70} />
-      <Welcome/>
-      <Spacer/>
-      <Instructors/>
-      <Spacer/>
+			<Welcome />
+			<Spacer />
+			<Instructors />
+			<Spacer />
 		</>
 	);
 };

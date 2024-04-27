@@ -14,7 +14,7 @@ const InstructorCard = (props) => {
 			<Image
 				src={`/images/instructors/${image}`}
 				width={400}
-				height={500}
+				height={400}
 				alt={displayName}
 			/>
 

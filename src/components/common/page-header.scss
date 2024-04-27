@@ -5,7 +5,8 @@
     text-align: center;
     padding: 30px 0;
     font-weight: 600;
-    color: v.$color2-op-50;
+    color: v.$color1;
     text-transform: uppercase;
-    text-shadow: 0 0 10px;
+    text-shadow: 0 3px 7px v.$color2;
+    letter-spacing: 0.5rem;
 }
