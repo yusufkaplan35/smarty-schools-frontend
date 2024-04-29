@@ -2,13 +2,22 @@
 import { loginAction } from "@/actions/auth-actions";
 import { initialResponse } from "@/helpers/form-validation";
 import React from "react";
-import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
+import {
+	Alert,
+	Button,
+	Card,
+	Col,
+	Container,
+	Form,
+	Row,
+} from "react-bootstrap";
 import { useFormState } from "react-dom";
 import "./login-form.scss";
 import PasswordInput from "../common/form-fields/password-input";
 
 const LoginForm = () => {
 	const [state, dispatch] = useFormState(loginAction, initialResponse);
+
 
 	return (
 		<Container className="login-form">
@@ -17,6 +26,10 @@ const LoginForm = () => {
 					<Card>
 						<Card.Body>
 							<h4>Please enter your username and password</h4>
+
+							{state.message ? (
+								<Alert variant="danger">{state.message}</Alert>
+							) : null}
 
 							<Form action={dispatch} noValidate>
 								<Form.Group
@@ -43,8 +56,6 @@ const LoginForm = () => {
 										name="password"
 										error={state.errors?.password}
 									/>
-
-									
 								</Form.Group>
 								<Button type="submit">Login</Button>
 							</Form>

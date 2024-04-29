@@ -1,5 +1,6 @@
 "use server";
 
+import { signIn } from "@/auth";
 import {
 	YupValidationError,
 	convertFormDataToJSON,
@@ -14,6 +15,9 @@ export const loginAction = async (prevState, formData) => {
 
 	try {
 		AuthSchema.validateSync(fields, { abortEarly: false });
+
+        await signIn("credentials", fields);
+
 	} catch (err) {
 		if (err instanceof YupValidationError) {
 			return transformYupErrors(err.inner);
