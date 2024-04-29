@@ -2,7 +2,7 @@
 import Image from "next/image";
 import React from "react";
 
-const UnAuthorizated = () => {
+const UnAuthorized = () => {
 	
 	return (
 		<div className="container">
@@ -34,4 +34,4 @@ const UnAuthorizated = () => {
 	);
 };
 
-export default UnAuthorizated;
+export default UnAuthorized;
