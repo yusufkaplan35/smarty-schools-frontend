@@ -1,0 +1,18 @@
+@use "../../styles/variables" as v;
+
+.login-form{
+    .card{
+        border-top:5px solid v.$color1;
+    }
+
+    h4{
+        margin-bottom: 20px;
+        color: v.$color2;
+        font-size: 1.3rem;
+    }
+
+    button[type="submit"]{
+        width: 100%;
+        padding: 10px;
+    }
+}

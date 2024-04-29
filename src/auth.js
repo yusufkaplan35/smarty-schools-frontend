@@ -17,11 +17,11 @@ const config = {
         })
     ],
     callbacks: { 
-        authorized(){
+        authorized({ auth, request }) {
             /* const isLoggedIn = !!auth;
             const isInLoginPage = nextUrl.pathname.startsWith("/login");
  */
-            return false;
+            return true;
 
 
 
@@ -32,4 +32,4 @@ const config = {
     }
 }
 
-export const { auth, signIn, signOut, handlers } = NextAuth(config);
+export const { handlers, auth, signIn, signOut } = NextAuth(config);

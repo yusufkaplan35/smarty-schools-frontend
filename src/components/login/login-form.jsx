@@ -1,15 +1,18 @@
+"use client";
 import { loginAction } from "@/actions/auth-actions";
 import { initialResponse } from "@/helpers/form-validation";
 import React from "react";
-import { Card, Col, Container, Form, Row } from "react-bootstrap";
+import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
 import { useFormState } from "react-dom";
+import "./login-form.scss";
+import PasswordInput from "../common/form-fields/password-input";
 
 const LoginForm = () => {
 	const [state, dispatch] = useFormState(loginAction, initialResponse);
 
 	return (
 		<Container className="login-form">
-			<Row>
+			<Row className="justify-content-center">
 				<Col md={8} lg={6}>
 					<Card>
 						<Card.Body>
@@ -36,16 +39,14 @@ const LoginForm = () => {
 									controlId="password"
 								>
 									<Form.Label>Password</Form.Label>
-									<Form.Control
-										type="password"
+									<PasswordInput
 										name="password"
-										isInvalid={!!state.errors?.password}
+										error={state.errors?.password}
 									/>
-									<Form.Control.Feedback type="invalid">
-										{state.errors?.password}
-									</Form.Control.Feedback>
+
+									
 								</Form.Group>
-                                <Button type="submit">Login</Button>
+								<Button type="submit">Login</Button>
 							</Form>
 						</Card.Body>
 					</Card>

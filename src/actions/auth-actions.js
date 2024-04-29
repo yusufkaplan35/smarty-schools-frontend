@@ -1,17 +1,26 @@
-"use server"
+"use server";
 
-import { convertFormDataToJSON } from "@/helpers/form-validation"
+import {
+	YupValidationError,
+	convertFormDataToJSON,
+	response,
+	transformYupErrors,
+} from "@/helpers/form-validation";
 import { AuthSchema } from "@/helpers/schemas/auth-schema";
+import { AuthError } from "next-auth";
 
+export const loginAction = async (prevState, formData) => {
+	const fields = convertFormDataToJSON(formData);
 
-export const loginAction = async ( prevState, formData ) => {
-    
-    const fields = convertFormDataToJSON(formData);
+	try {
+		AuthSchema.validateSync(fields, { abortEarly: false });
+	} catch (err) {
+		if (err instanceof YupValidationError) {
+			return transformYupErrors(err.inner);
+		} else if (err instanceof AuthError) {
+			return response(false, "Invalid credentials");
+		}
 
-    try {
-        AuthSchema.validateSync(fields, { abortEarly: false});
-    } catch (err) {
-        
-    }
-
-}
+		throw err;
+	}
+};
