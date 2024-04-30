@@ -1,8 +1,16 @@
+import PageHeader from '@/components/common/page-header'
+import Spacer from '@/components/common/spacer'
+import DashboardNavigation from '@/components/dashboard/home/dashboard-navigation'
 import React from 'react'
 
 const DashboardPage = () => {
   return (
-    <div>DashboardPage</div>
+    <>
+      <PageHeader>Dashboard</PageHeader>
+      <Spacer height={70}/>
+      <DashboardNavigation/>
+      <Spacer/>
+    </>
   )
 }
 
