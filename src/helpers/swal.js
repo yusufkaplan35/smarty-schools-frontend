@@ -14,7 +14,7 @@ export const swConfirm = (
 	text = "",
 	confirmButtonText = "Yes"
 ) => {
-	Swal.fire({
+	return Swal.fire({
 		title,
 		text,
 		icon,

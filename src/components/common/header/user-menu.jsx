@@ -7,7 +7,13 @@ const UserMenu = async () => {
 	const session = await auth();
 
 	return (
-		<div>{session?.user?.role ? <UserMenuAuth /> : <UserMenuGuest />}</div>
+		<div>
+			{session?.user?.role ? (
+				<UserMenuAuth session={session} />
+			) : (
+				<UserMenuGuest />
+			)}
+		</div>
 	);
 };
 
