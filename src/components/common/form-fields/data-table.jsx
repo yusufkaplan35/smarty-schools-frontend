@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 export const Column = ({ children }) => {
@@ -12,45 +13,107 @@ export const Cell = ({ children }) => {
 	return <td>{children}</td>;
 };
 
-export const Pagination = ({ totalPages }) => {
+export const FirstPageButton = ({ currentPage }) => {
+	return (
+		<li className="page-item">
+			<Link
+				className={`page-link ${currentPage ? "" : "disabled"}`}
+				href="?page=0"
+			>
+				&laquo;
+			</Link>
+		</li>
+	);
+};
+
+export const PreviousPageButton = ({ currentPage }) => {
+	return (
+		<li className="page-item">
+			<a
+				className={`page-link ${currentPage ? "" : "disabled"}`}
+				href={`?page=${currentPage - 1}`}
+			>
+				&lsaquo;
+			</a>
+		</li>
+	);
+};
+
+export const PageButton = ({ totalPages, currentPage }) => {
+	return [...new Array(totalPages)].map((_, index) => (
+		<li className="page-item" key={index}>
+			<Link
+				className={`page-link ${
+					index === currentPage ? "disabled" : ""
+				}`}
+				href={`?page=${index}`}
+			>
+				{index + 1}
+			</Link>
+		</li>
+	));
+};
+
+export const NextPageButton = ({ currentPage, totalPages }) => {
+	return (
+		<li className="page-item">
+			<a
+				className={`page-link ${
+					currentPage + 1 < totalPages ? "" : "disabled"
+				}`}
+				href={`?page=${currentPage + 1}`}
+			>
+				&rsaquo;
+			</a>
+		</li>
+	);
+};
+
+export const LastPageButton = ({ currentPage, totalPages }) => {
+	return (
+		<li className="page-item">
+			<a
+				className={`page-link ${
+					currentPage + 1 < totalPages ? "" : "disabled"
+				}`}
+				href={`?page=${totalPages - 1}`}
+			>
+				&raquo;
+			</a>
+		</li>
+	);
+};
+
+export const Pagination = ({ totalPages, currentPage }) => {
 	return (
 		<nav aria-label="Navigation" className="d-flex justify-content-center ">
 			<ul className="pagination">
-				<li className="page-item">
-					<a className="page-link" href="#">
-						&laquo;
-					</a>
-				</li>
-				<li className="page-item">
-					<a className="page-link" href="#">
-						&lsaquo;
-					</a>
-				</li>
-				{[...new Array(totalPages)].map((_, index) => (
-					<li className="page-item" key={index}>
-						<a className="page-link" href={`?page=${index}`}>
-							{index + 1}
-						</a>
-					</li>
-				))}
-
-				<li className="page-item">
-					<a className="page-link" href="#">
-						&rsaquo;
-					</a>
-				</li>
-				<li className="page-item">
-					<a className="page-link" href="#">
-						&raquo;
-					</a>
-				</li>
+				<FirstPageButton currentPage={currentPage} />
+				<PreviousPageButton currentPage={currentPage} />
+				<PageButton totalPages={totalPages} currentPage={currentPage} />
+				<NextPageButton
+					totalPages={totalPages}
+					currentPage={currentPage}
+				/>
+				<LastPageButton
+					totalPages={totalPages}
+					currentPage={currentPage}
+				/>
 			</ul>
 		</nav>
 	);
 };
 
 const DataTable = (props) => {
-	const { title, dataSource, dataKey, totalPages, children } = props;
+	const {
+		title,
+		dataSource,
+		dataKey,
+		totalPages,
+		currentPage,
+		pageSize,
+		children,
+	} = props;
 
 	if (!dataSource || !Array.isArray(dataSource))
 		throw new Error("dataSource attribute is required");
@@ -70,15 +133,21 @@ const DataTable = (props) => {
 							{dataSource.map((row, rowIndex) => (
 								<Row key={row[dataKey]}>
 									{children.map((cell) => {
-										const { dataField, index } = cell.props;
+										const { dataField, index, template } = cell.props;
 										let cellData = "";
 										const cellKey =
 											row[dataKey] + dataField + cellData;
 
 										if (index) {
-											cellData = rowIndex + 1;
+											cellData =
+												pageSize * currentPage +
+												rowIndex +
+												1;
 										} else if (dataField) {
 											cellData = row[dataField];
+										}
+										else if(template){
+											cellData = template(row);
 										}
 
 										return (
@@ -92,7 +161,10 @@ const DataTable = (props) => {
 						</tbody>
 					</table>
 
-					<Pagination totalPages={totalPages} />
+					<Pagination
+						totalPages={totalPages}
+						currentPage={currentPage}
+					/>
 				</div>
 			</div>
 		</div>
