@@ -3,11 +3,10 @@ import Link from "next/link";
 import React from "react";
 import { Container } from "react-bootstrap";
 
-const AdminList = () => {
-	const arr = [
-		{ id: 3, firstName: "Ali", lastName: "Gel" },
-		{ id: 5, firstName: "Veli", lastName: "Git" },
-	];
+const AdminList = ({ data }) => {
+	const { content, totalPages } = data;
+
+	console.log(data)
 
 	return (
 		<Container>
@@ -15,10 +14,16 @@ const AdminList = () => {
 				New
 			</Link>
 
-			<DataTable title="Admin List" dataSource={arr} dataKey="id">
-				<Column dataField="firstName">First name</Column>
-				<Column dataField="lastName">Last name</Column>
-				<Column dataField="userName">Username</Column>
+			<DataTable
+				title="Admin List"
+				dataSource={content}
+				dataKey="id"
+				totalPages={totalPages}
+			>
+				<Column index={true}>#</Column>
+				<Column dataField="name">First name</Column>
+				<Column dataField="surname">Last name</Column>
+				<Column dataField="username">Username</Column>
 			</DataTable>
 		</Container>
 	);
