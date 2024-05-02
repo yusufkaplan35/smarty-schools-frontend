@@ -2,17 +2,13 @@ import DataTable, { Column } from "@/components/common/form-fields/data-table";
 import Link from "next/link";
 import React from "react";
 import { Container } from "react-bootstrap";
-import { TfiTrash } from "react-icons/tfi";
+import AdminToolbar from "./admin-toolbar";
 
 const AdminList = ({ data }) => {
 	const { content, totalPages, number, size } = data;
 
 	const handleToolbar = (row) => {
-		return (
-			<button className="btn text-danger">
-				<TfiTrash />
-			</button>
-		);
+		return <AdminToolbar row={row} />;
 	};
 
 	return (
