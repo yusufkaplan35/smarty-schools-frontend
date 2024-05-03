@@ -1,5 +1,6 @@
 "use client";
 import { createAdminAction } from "@/actions/admin-actions";
+import BackButton from "@/components/common/form-fields/back-button";
 import MaskedInput from "@/components/common/form-fields/masked-input";
 import SelectInput from "@/components/common/form-fields/select-input";
 import SubmitButton from "@/components/common/form-fields/submit-button";
@@ -122,7 +123,7 @@ const AdminCreateForm = () => {
 								/>
 							</Col>
 						</Row>
-						<SubmitButton />
+						<BackButton/> <SubmitButton />
 					</Form>
 				</Card.Body>
 			</Card>

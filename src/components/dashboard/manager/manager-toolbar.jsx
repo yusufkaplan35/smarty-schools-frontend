@@ -2,7 +2,7 @@
 import { deleteManagerAction } from "@/actions/manager-actions";
 import { swAlert, swConfirm } from "@/helpers/swal";
 import React from "react";
-import { TfiTrash } from "react-icons/tfi";
+import { TfiPencil, TfiTrash } from "react-icons/tfi";
 
 const ManagerToolbar = ({ row }) => {
 	const handleDelete = async () => {
@@ -18,9 +18,17 @@ const ManagerToolbar = ({ row }) => {
 	};
 
 	return (
-		<button className="btn text-danger" onClick={handleDelete}>
-			<TfiTrash />
-		</button>
+		<>
+			<a
+				className="btn text-info"
+				href={`/dashboard/manager/${row.userId}`}
+			>
+				<TfiPencil />
+			</a>
+			<button className="btn text-danger" onClick={handleDelete}>
+				<TfiTrash />
+			</button>
+		</>
 	);
 };
 

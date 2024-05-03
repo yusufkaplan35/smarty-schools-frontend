@@ -17,6 +17,12 @@ export const getAllManagersByPage = async (
 	});
 };
 
+export const getManagerById = async (id) => {
+	return fetch(`${API_URL}/dean/getManagerById/${id}`, {
+		headers: await getAuthHeader(),
+	});
+};
+
 export const createManager = async (payload) => {
 	return fetch(`${API_URL}/dean/save`, {
 		method: "post",
