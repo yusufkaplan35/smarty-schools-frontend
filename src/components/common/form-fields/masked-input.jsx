@@ -7,10 +7,11 @@ const MaskedInput = ({ className, label, error, ...rest }) => {
 	return (
 		<Form.Group className={className} controlId={rest.name}>
 			<Form.Label>{label}</Form.Label>
-			<ReactInputMask
+			<Form.Control
 				{...rest}
 				className="form-control"
 				isInvalid={!!error}
+				as={ReactInputMask}
 			/>
 
 			<Form.Control.Feedback type="invalid">

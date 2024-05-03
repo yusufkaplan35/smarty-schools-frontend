@@ -1,5 +1,5 @@
 "use client";
-import { createAdminAction } from "@/actions/admin-actions";
+import { createManagerAction } from "@/actions/manager-actions";
 import MaskedInput from "@/components/common/form-fields/masked-input";
 import SelectInput from "@/components/common/form-fields/select-input";
 import SubmitButton from "@/components/common/form-fields/submit-button";
@@ -12,13 +12,13 @@ import React from "react";
 import { Card, Col, Container, Form, Row } from "react-bootstrap";
 import { useFormState } from "react-dom";
 
-const AdminCreateForm = () => {
-	const [state, dispatch] = useFormState(createAdminAction, initialResponse);
+const ManagerCreateForm = () => {
+	const [state, dispatch] = useFormState(createManagerAction, initialResponse);
 	const router = useRouter();
 
 	if (state.ok) {
 		swAlert(state.message, "success");
-		router.push("/dashboard/admin");
+		router.push("/dashboard/manager");
 	} else if (state.message) {
 		swAlert(state.message, "error");
 	}
@@ -130,4 +130,4 @@ const AdminCreateForm = () => {
 	);
 };
 
-export default AdminCreateForm;
+export default ManagerCreateForm;

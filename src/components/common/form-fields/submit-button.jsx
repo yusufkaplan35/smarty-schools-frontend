@@ -8,12 +8,12 @@ const SubmitButton = ({
 	title = "Submit",
 	icon = "MdSend",
 	iconfamily = "md",
-	buttonVariant = "primary",
 	spinnerVariant = "secondary",
+	...rest
 }) => {
 	const { pending } = useFormStatus();
 	return (
-		<Button type="submit" variant={buttonVariant} disabled={pending}>
+		<Button type="submit" {...rest} disabled={pending}>
 			{pending ? (
 				<Spinner variant={spinnerVariant} size="sm" />
 			) : (

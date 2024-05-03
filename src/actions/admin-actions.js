@@ -19,7 +19,7 @@ export const createAdminAction = async (prevState, formData) => {
 		const res = await createAdmin(fields);
 		const data = await res.json();
 
-		console.log(data);
+		
 
 		if (!res.ok) {
 			return response(false, data?.message);
@@ -31,6 +31,9 @@ export const createAdminAction = async (prevState, formData) => {
 
 		throw err;
 	}
+
+	//revalidatePath("/dashboard/admin");
+	return response(true, "Admin was created");
 };
 
 export const deleteAdminAction = async (id) => {

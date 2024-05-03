@@ -14,6 +14,7 @@ import {
 import { useFormState } from "react-dom";
 import "./login-form.scss";
 import PasswordInput from "../common/form-fields/password-input";
+import SubmitButton from "../common/form-fields/submit-button";
 
 const LoginForm = () => {
 	const [state, dispatch] = useFormState(loginAction, initialResponse);
@@ -59,7 +60,8 @@ const LoginForm = () => {
 										error={state?.errors?.password}
 									/>
 								</Form.Group>
-								<Button type="submit">Login</Button>
+								<SubmitButton>Login</SubmitButton>
+							
 							</Form>
 						</Card.Body>
 					</Card>

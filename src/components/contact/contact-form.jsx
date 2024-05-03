@@ -13,17 +13,18 @@ import { createContactMessageAction } from "@/actions/contact-actions";
 import { initialResponse } from "@/helpers/form-validation";
 import { useFormState } from "react-dom";
 import { swAlert } from "@/helpers/swal";
+import SubmitButton from "../common/form-fields/submit-button";
 
 const ContactForm = () => {
 	const [state, dispatch] = useFormState(
 		createContactMessageAction,
 		initialResponse
 	);
-    const formRef = useRef();
+	const formRef = useRef();
 
 	if (state.message) {
 		if (state.ok) {
-            formRef.current.reset();
+			formRef.current.reset();
 			swAlert(state.message, "success");
 		} else {
 			swAlert(state.message, "error");
@@ -106,9 +107,9 @@ const ContactForm = () => {
 						</InputGroup>
 					</Col>
 				</Row>
-				<Button type="submit" variant="outline-primary" size="lg">
-					<TfiLocationArrow /> Send
-				</Button>
+				<SubmitButton variant="outline-primary" size="lg">
+					Send
+				</SubmitButton>
 			</Form>
 		</div>
 	);
