@@ -28,9 +28,7 @@ export const createAssistantAction = async (prevState, formData) => {
 		}
 
 		revalidatePath("/dashboard/assistant-manager");
-		console.log("Hi!!!")
 		return response(true, "Assistant was created", {});
-
 	} catch (err) {
 		if (err instanceof YupValidationError) {
 			return transformYupErrors(err.inner);
@@ -54,6 +52,9 @@ export const updateAssistantAction = async (prevState, formData) => {
 		if (!res.ok) {
 			return response(false, data?.message);
 		}
+
+		revalidatePath("/dashboard/assistant-manager");
+		return response(true, "Assistant was updated");
 	} catch (err) {
 		if (err instanceof YupValidationError) {
 			return transformYupErrors(err.inner);
@@ -61,9 +62,6 @@ export const updateAssistantAction = async (prevState, formData) => {
 
 		throw err;
 	}
-
-	//revalidatePath("/dashboard/admin");
-	return response(true, "Assistant was updated");
 };
 
 export const deleteAssistantAction = async (id) => {
@@ -77,10 +75,10 @@ export const deleteAssistantAction = async (id) => {
 			const data = await res.text();
 			throw new Error(data);
 		}
+
+		revalidatePath("/dashboard/assistant-manager");
+		return response(true, "Assistant was deleted");
 	} catch (err) {
 		return response(false, err.message);
 	}
-
-	revalidatePath("/dashboard/assistant-manager");
-	return response(true, "Assistant was deleted");
 };

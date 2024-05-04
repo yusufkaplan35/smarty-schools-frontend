@@ -26,6 +26,9 @@ export const createManagerAction = async (prevState, formData) => {
 		if (!res.ok) {
 			return response(false, data?.message);
 		}
+
+		revalidatePath("/dashboard/manager");
+		return response(true, "Manager was created");
 	} catch (err) {
 		if (err instanceof YupValidationError) {
 			return transformYupErrors(err.inner);
@@ -33,13 +36,9 @@ export const createManagerAction = async (prevState, formData) => {
 
 		throw err;
 	}
-
-	//revalidatePath("/dashboard/admin");
-	return response(true, "Manager was created");
 };
 
 export const updateManagerAction = async (prevState, formData) => {
-	
 	if (!formData.get("id")) throw new Error("Id is missing");
 
 	try {
@@ -53,6 +52,9 @@ export const updateManagerAction = async (prevState, formData) => {
 		if (!res.ok) {
 			return response(false, data?.message);
 		}
+
+		revalidatePath("/dashboard/manager");
+		return response(true, "Manager was updated");
 	} catch (err) {
 		if (err instanceof YupValidationError) {
 			return transformYupErrors(err.inner);
@@ -60,9 +62,6 @@ export const updateManagerAction = async (prevState, formData) => {
 
 		throw err;
 	}
-
-	//revalidatePath("/dashboard/admin");
-	return response(true, "Manager was updated");
 };
 
 export const deleteManagerAction = async (id) => {
@@ -76,10 +75,10 @@ export const deleteManagerAction = async (id) => {
 			const data = await res.text();
 			throw new Error(data);
 		}
+
+		revalidatePath("/dashboard/manager");
+		return response(true, "Manager was deleted");
 	} catch (err) {
 		return response(false, err.message);
 	}
-
-	revalidatePath("/dashboard/manager");
-	return response(true, "Manager was deleted");
 };

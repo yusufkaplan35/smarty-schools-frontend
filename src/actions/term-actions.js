@@ -19,11 +19,12 @@ export const createTermAction = async (prevState, formData) => {
 		const res = await createTerm(fields);
 		const data = await res.json();
 
-		
-
 		if (!res.ok) {
 			return response(false, data?.message);
 		}
+
+		revalidatePath("/dashboard/education-term");
+		return response(true, "Term was created");
 	} catch (err) {
 		if (err instanceof YupValidationError) {
 			return transformYupErrors(err.inner);
@@ -31,9 +32,6 @@ export const createTermAction = async (prevState, formData) => {
 
 		throw err;
 	}
-
-	//revalidatePath("/dashboard/admin");
-	return response(true, "Term was created");
 };
 
 export const deleteTermAction = async (id) => {
@@ -47,10 +45,10 @@ export const deleteTermAction = async (id) => {
 			const data = await res.text();
 			throw new Error(data);
 		}
+
+		revalidatePath("/dashboard/education-term");
+		return response(true, "Term was deleted");
 	} catch (err) {
 		return response(false, err.message);
 	}
-
-	revalidatePath("/dashboard/term");
-	return response(true, "Term was deleted");
 };

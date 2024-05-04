@@ -8,6 +8,7 @@ import {
 } from "@/helpers/form-validation";
 import { ContactSchema } from "@/helpers/schemas/contact-schema";
 import { createContactMessage } from "@/services/contact-services";
+import {revalidatePath} from "next/cache";
 
 export const createContactMessageAction = async (prevState, formData) => {
 	try {
@@ -22,6 +23,7 @@ export const createContactMessageAction = async (prevState, formData) => {
 			return response(false, "", data.validations )
 		}
 
+		revalidatePath("/dashboard/contact-message");
         return response(true, "Your message was sent");
 
 	} catch (err) {
