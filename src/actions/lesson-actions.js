@@ -6,7 +6,7 @@ import {
 	response,
 	transformYupErrors,
 } from "@/helpers/form-validation";
-import { LessonSchema } from "@/helpers/schemas/admin-schema";
+import { LessonSchema } from "@/helpers/schemas/lesson-schema";
 import { createLesson, deleteLesson } from "@/services/lesson-service";
 import { revalidatePath } from "next/cache";
 

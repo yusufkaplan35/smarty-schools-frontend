@@ -5,6 +5,8 @@ import PasswordInput from "./password-input";
 import SelectInput from "./select-input";
 import SubmitButton from "./submit-button";
 import TextInput from "./text-input";
+import Checkbox from "./checkbox";
+
 
 export {
 	MaskedInput,
@@ -14,4 +16,5 @@ export {
 	SelectInput,
 	SubmitButton,
 	TextInput,
+	Checkbox
 };

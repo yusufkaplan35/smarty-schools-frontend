@@ -2,11 +2,10 @@
 import { createLessonAction } from "@/actions/lesson-actions";
 import {
 	BackButton,
-	SelectInput,
+	Checkbox,
 	SubmitButton,
 	TextInput,
 } from "@/components/common/form-fields";
-import { config } from "@/helpers/config";
 import { initialResponse } from "@/helpers/form-validation";
 import { swAlert } from "@/helpers/swal";
 import { useRouter } from "next/navigation";
@@ -34,39 +33,28 @@ const LessonCreateForm = () => {
 					<Form noValidate action={dispatch}>
 						<Row xs={1} md={2} xl={3}>
 							<Col>
-								<SelectInput
-									name="term"
+								<TextInput
+									type="text"
+									name="lessonName"
 									className="mb-3"
-									label="Term"
-									options={config.educationTerms}
-									error={state?.errors?.term}
+									label="Name"
+									error={state?.errors?.lessonName}
 								/>
 							</Col>
 							<Col>
 								<TextInput
-									type="date"
-									name="startDate"
+									type="number"
+									name="creditScore"
 									className="mb-3"
-									label="Start"
-									error={state?.errors?.startDate}
+									label="Credit"
+									error={state?.errors?.creditScore}
 								/>
 							</Col>
 							<Col>
-								<TextInput
-									type="date"
-									name="endDate"
+								<Checkbox
+									name="compulsory"
 									className="mb-3"
-									label="End"
-									error={state?.errors?.endDate}
-								/>
-							</Col>
-							<Col>
-								<TextInput
-									type="date"
-									name="lastRegistrationDate"
-									className="mb-3"
-									label="Last registration"
-									error={state?.errors?.lastRegistrationDate}
+									label="Compulsory"
 								/>
 							</Col>
 						</Row>

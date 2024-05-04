@@ -1,6 +1,7 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { login } from "./services/auth-service";
+import { getIsTokenValid, getIsUserAuthorized } from "./helpers/auth-helper";
 
 const config = {
 	providers: [
@@ -24,16 +25,26 @@ const config = {
 		// middleware in kapsama alanina giren sayfalara yapilan isteklerden hemen once calisir
 		authorized({ auth, request }) {
 			const { pathname } = request.nextUrl;
+			const userRole = auth?.user?.role;
 
-			//console.log("AUTHORIZED", auth, pathname);
-
-			const isLoggedIn = !!auth?.user?.role;
+			const isLoggedIn = !!userRole;
 			const isInLoginPage = pathname.startsWith("/login");
 			const isInDashboardPages = pathname.startsWith("/dashboard");
+			const isTokenValid = getIsTokenValid(auth?.accessToken);
 
-			if (isLoggedIn) {
+			if (isLoggedIn && isTokenValid) {
 				if (isInDashboardPages) {
-					return true;
+					const isUserAuthorized = getIsUserAuthorized(
+						userRole,
+						pathname
+					);
+					if (isUserAuthorized) return true;
+
+					return Response.redirect(
+						new URL("/unauthorized", request.nextUrl)
+					);
+
+					
 				} else if (isInLoginPage) {
 					return Response.redirect(
 						new URL("/dashboard", request.nextUrl)
@@ -45,19 +56,19 @@ const config = {
 
 			return true;
 		},
-		// JWT datasina ihtiyac duyan her route icin calisir
+		// JWT datasina ihtiyac duyan her yerde
 		async jwt({ token, user }) {
 			//console.log("JWT", token, user);
-			return { ...user, ...token }
+			return { ...user, ...token };
 		},
-		// Session datasina ihtiyac duyan her route icin calisir
+		// Session datasina ihtiyac duyan her yerde
 		async session({ session, token }) {
-			//console.log("SESSION", session, token);
-			
+			const isTokenValid = getIsTokenValid(token.accessToken);
+			if (!isTokenValid) return null;
+
 			session.accessToken = token.accessToken;
 			session.user = token.user;
 			return session;
-			
 		},
 	},
 
