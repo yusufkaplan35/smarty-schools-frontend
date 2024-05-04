@@ -56,7 +56,7 @@ const LoginForm = () => {
 									<Form.Label>Password</Form.Label>
 									<PasswordInput
 										name="password"
-										defaultValue="12345aA."
+										defaultValue="123456Aa."
 										error={state?.errors?.password}
 									/>
 								</Form.Group>

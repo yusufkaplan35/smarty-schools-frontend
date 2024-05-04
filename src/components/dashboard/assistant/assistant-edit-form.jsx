@@ -1,5 +1,5 @@
 "use client";
-import { updateManagerAction } from "@/actions/manager-actions";
+import { updateAssistantAction } from "@/actions/assistant-actions";
 import {
 	BackButton,
 	MaskedInput,
@@ -16,16 +16,16 @@ import React from "react";
 import { Card, Col, Container, Form, Row } from "react-bootstrap";
 import { useFormState } from "react-dom";
 
-const ManagerEditForm = ({ user }) => {
+const AssistantEditForm = ({ user }) => {
 	const [state, dispatch] = useFormState(
-		updateManagerAction,
+		updateAssistantAction,
 		initialResponse
 	);
 	const router = useRouter();
 
 	if (state.ok) {
 		swAlert(state.message, "success");
-		router.push("/dashboard/manager");
+		router.push("/dashboard/assistant-manager");
 	} else if (state.message) {
 		swAlert(state.message, "error");
 	}
@@ -146,4 +146,4 @@ const ManagerEditForm = ({ user }) => {
 	);
 };
 
-export default ManagerEditForm;
+export default AssistantEditForm;

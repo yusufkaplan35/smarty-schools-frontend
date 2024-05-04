@@ -1,10 +1,12 @@
 "use client";
 import { createAdminAction } from "@/actions/admin-actions";
-import BackButton from "@/components/common/form-fields/back-button";
-import MaskedInput from "@/components/common/form-fields/masked-input";
-import SelectInput from "@/components/common/form-fields/select-input";
-import SubmitButton from "@/components/common/form-fields/submit-button";
-import TextInput from "@/components/common/form-fields/text-input";
+import {
+	BackButton,
+	MaskedInput,
+	SelectInput,
+	SubmitButton,
+	TextInput,
+} from "@/components/common/form-fields";
 import { config } from "@/helpers/config";
 import { initialResponse } from "@/helpers/form-validation";
 import { swAlert } from "@/helpers/swal";
@@ -55,6 +57,7 @@ const AdminCreateForm = () => {
 									name="gender"
 									className="mb-3"
 									label="Gender"
+									defaultValue=""
 									options={config.genders}
 									error={state?.errors?.gender}
 								/>
@@ -123,7 +126,7 @@ const AdminCreateForm = () => {
 								/>
 							</Col>
 						</Row>
-						<BackButton/> <SubmitButton />
+						<BackButton /> <SubmitButton />
 					</Form>
 				</Card.Body>
 			</Card>

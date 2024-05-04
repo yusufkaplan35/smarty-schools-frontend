@@ -1,10 +1,12 @@
 "use client";
 import { createManagerAction } from "@/actions/manager-actions";
-import BackButton from "@/components/common/form-fields/back-button";
-import MaskedInput from "@/components/common/form-fields/masked-input";
-import SelectInput from "@/components/common/form-fields/select-input";
-import SubmitButton from "@/components/common/form-fields/submit-button";
-import TextInput from "@/components/common/form-fields/text-input";
+import {
+	BackButton,
+	MaskedInput,
+	SelectInput,
+	SubmitButton,
+	TextInput,
+} from "@/components/common/form-fields";
 import { config } from "@/helpers/config";
 import { initialResponse } from "@/helpers/form-validation";
 import { swAlert } from "@/helpers/swal";
@@ -14,7 +16,10 @@ import { Card, Col, Container, Form, Row } from "react-bootstrap";
 import { useFormState } from "react-dom";
 
 const ManagerCreateForm = () => {
-	const [state, dispatch] = useFormState(createManagerAction, initialResponse);
+	const [state, dispatch] = useFormState(
+		createManagerAction,
+		initialResponse
+	);
 	const router = useRouter();
 
 	if (state.ok) {
@@ -54,6 +59,7 @@ const ManagerCreateForm = () => {
 								<SelectInput
 									name="gender"
 									className="mb-3"
+									defaultValue=""
 									label="Gender"
 									options={config.genders}
 									error={state?.errors?.gender}
@@ -123,7 +129,7 @@ const ManagerCreateForm = () => {
 								/>
 							</Col>
 						</Row>
-						<BackButton/> <SubmitButton />
+						<BackButton /> <SubmitButton />
 					</Form>
 				</Card.Body>
 			</Card>
