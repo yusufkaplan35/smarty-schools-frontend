@@ -72,7 +72,7 @@ export const deleteAssistantAction = async (id) => {
 
 		if (!res.ok) {
 			const data = await res.json();
-			throw new Error(data);
+			throw new Error(data?.message);
 		}
 
 		revalidatePath("/dashboard/assistant-manager");

@@ -7,7 +7,7 @@ import {
 	transformYupErrors,
 } from "@/helpers/form-validation";
 import { LessonSchema } from "@/helpers/schemas/admin-schema";
-import { createLesson, deleteLesson } from "@/services/admin-service";
+import { createLesson, deleteLesson } from "@/services/lesson-service";
 import { revalidatePath } from "next/cache";
 
 export const createLessonAction = async (prevState, formData) => {
@@ -35,14 +35,14 @@ export const createLessonAction = async (prevState, formData) => {
 };
 
 export const deleteLessonAction = async (id) => {
+	console.log(id)
 	if (!id) throw new Error("Id is missing");
 
 	try {
 		const res = await deleteLesson(id);
-
 		if (!res.ok) {
 			const data = await res.json();
-			throw new Error(data);
+			throw new Error(data?.message);
 		}
 
 		revalidatePath("/dashboard/lesson");
