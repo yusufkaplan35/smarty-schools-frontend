@@ -1,8 +1,7 @@
 "use client";
-import { createTermAction } from "@/actions/term-actions";
+import { createLessonAction } from "@/actions/lesson-actions";
 import {
 	BackButton,
-	MaskedInput,
 	SelectInput,
 	SubmitButton,
 	TextInput,
@@ -15,13 +14,13 @@ import React from "react";
 import { Card, Col, Container, Form, Row } from "react-bootstrap";
 import { useFormState } from "react-dom";
 
-const TermCreateForm = () => {
-	const [state, dispatch] = useFormState(createTermAction, initialResponse);
+const LessonCreateForm = () => {
+	const [state, dispatch] = useFormState(createLessonAction, initialResponse);
 	const router = useRouter();
 
 	if (state.ok) {
 		swAlert(state.message, "success");
-		router.push("/dashboard/education-term");
+		router.push("/dashboard/lesson");
 	} else if (state.message) {
 		swAlert(state.message, "error");
 	}
@@ -34,7 +33,6 @@ const TermCreateForm = () => {
 
 					<Form noValidate action={dispatch}>
 						<Row xs={1} md={2} xl={3}>
-
 							<Col>
 								<SelectInput
 									name="term"
@@ -72,7 +70,7 @@ const TermCreateForm = () => {
 								/>
 							</Col>
 						</Row>
-						<BackButton/> <SubmitButton />
+						<BackButton /> <SubmitButton />
 					</Form>
 				</Card.Body>
 			</Card>
@@ -80,4 +78,4 @@ const TermCreateForm = () => {
 	);
 };
 
-export default TermCreateForm;
+export default LessonCreateForm;
