@@ -71,8 +71,7 @@ export const deleteManagerAction = async (id) => {
 		const res = await deleteManager(id);
 
 		if (!res.ok) {
-			// API daki donus degeri json degil string oldugu icin res.text() ile karsilamak zorunda kaldik
-			const data = await res.text();
+			const data = await res.json();
 			throw new Error(data);
 		}
 
