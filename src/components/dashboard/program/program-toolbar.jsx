@@ -1,16 +1,16 @@
 "use client";
-import { deleteLessonAction } from "@/actions/lesson-actions";
+import { deleteProgramAction } from "@/actions/program-actions";
 import { swAlert, swConfirm } from "@/helpers/swal";
 import React from "react";
 import { Button } from "react-bootstrap";
 import { TfiTrash } from "react-icons/tfi";
 
-const LessonToolbar = ({ row }) => {
+const ProgramToolbar = ({ row }) => {
 	const handleDelete = async () => {
 		const answer = await swConfirm("Are you sure to delete?");
 		if (!answer.isConfirmed) return;
 
-		const res = await deleteLessonAction(row.lessonId);
+		const res = await deleteProgramAction(row.lessonProgramId);
 		if (res.ok) {
 			swAlert(res.message, "success");
 		} else {
@@ -19,10 +19,10 @@ const LessonToolbar = ({ row }) => {
 	};
 
 	return (
-		<Button variant="danger" onClick={handleDelete}>
+		<Button variant="link" onClick={handleDelete}>
 			<TfiTrash />
 		</Button>
 	);
 };
 
-export default LessonToolbar;
+export default ProgramToolbar;

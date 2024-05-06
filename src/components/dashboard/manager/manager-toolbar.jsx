@@ -1,7 +1,9 @@
 "use client";
 import { deleteManagerAction } from "@/actions/manager-actions";
 import { swAlert, swConfirm } from "@/helpers/swal";
+import Link from "next/link";
 import React from "react";
+import { Button } from "react-bootstrap";
 import { TfiPencil, TfiTrash } from "react-icons/tfi";
 
 const ManagerToolbar = ({ row }) => {
@@ -19,15 +21,15 @@ const ManagerToolbar = ({ row }) => {
 
 	return (
 		<>
-			<a
+			<Link
 				className="btn text-info"
 				href={`/dashboard/manager/${row.userId}`}
 			>
 				<TfiPencil />
-			</a>
-			<button className="btn text-danger" onClick={handleDelete}>
+			</Link>
+			<Button variant="danger" onClick={handleDelete}>
 				<TfiTrash />
-			</button>
+			</Button>
 		</>
 	);
 };

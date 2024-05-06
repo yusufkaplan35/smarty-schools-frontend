@@ -109,16 +109,20 @@ const DataTable = (props) => {
 		title,
 		dataSource,
 		dataKey,
-		totalPages,
-		currentPage,
-		pageSize,
 		children,
+		totalPages = 0,
+		currentPage = 0,
+		pageSize = 0,
 	} = props;
 
 	if (!dataSource || !Array.isArray(dataSource))
 		throw new Error("dataSource attribute is required");
 
 	if (!dataKey) throw new Error("dataKey attribute is required");
+
+	if (!children) throw new Error("Column required");
+
+	const columns = Array.isArray(children) ? [...children] : [children];
 
 	return (
 		<div className="card">
@@ -132,8 +136,9 @@ const DataTable = (props) => {
 						<tbody>
 							{dataSource.map((row, rowIndex) => (
 								<Row key={row[dataKey]}>
-									{children.map((cell) => {
-										const { dataField, index, template } = cell.props;
+									{columns.map((cell) => {
+										const { dataField, index, template } =
+											cell.props;
 										let cellData = "";
 										const cellKey =
 											row[dataKey] + dataField + cellData;
@@ -145,8 +150,7 @@ const DataTable = (props) => {
 												1;
 										} else if (dataField) {
 											cellData = row[dataField];
-										}
-										else if(template){
+										} else if (template) {
 											cellData = template(row);
 										}
 
@@ -161,10 +165,12 @@ const DataTable = (props) => {
 						</tbody>
 					</table>
 
-					<Pagination
-						totalPages={totalPages}
-						currentPage={currentPage}
-					/>
+					{totalPages > 1 ? (
+						<Pagination
+							totalPages={totalPages}
+							currentPage={currentPage}
+						/>
+					) : null}
 				</div>
 			</div>
 		</div>

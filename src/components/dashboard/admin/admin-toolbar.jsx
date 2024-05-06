@@ -2,6 +2,7 @@
 import { deleteAdminAction } from "@/actions/admin-actions";
 import { swAlert, swConfirm } from "@/helpers/swal";
 import React from "react";
+import { Button } from "react-bootstrap";
 import { TfiTrash } from "react-icons/tfi";
 
 const AdminToolbar = ({ row }) => {
@@ -18,9 +19,9 @@ const AdminToolbar = ({ row }) => {
 	};
 
 	return (
-		<button className="btn text-danger" onClick={handleDelete}>
+		<Button variant="danger" onClick={handleDelete}>
 			<TfiTrash />
-		</button>
+		</Button>
 	);
 };
 
