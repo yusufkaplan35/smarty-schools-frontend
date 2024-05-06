@@ -11,3 +11,7 @@ export const getGenderValues = () => {
 export const getTermValues = () => {
 	return config.educationTerms.map((item) => item.value);
 };
+
+export const getDayValues = () => {
+	return config.days.map((item) => item.value);
+};
