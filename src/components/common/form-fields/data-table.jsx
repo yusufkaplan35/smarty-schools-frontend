@@ -114,6 +114,7 @@ const DataTable = (props) => {
 		dataSource,
 		dataKey,
 		children,
+		error,
 		selectionMode = "none", //single, multiple, none
 		totalPages = 0,
 		currentPage = 0,
@@ -154,10 +155,9 @@ const DataTable = (props) => {
 		setSelectedItems(arr);
 	};
 
-	console.log(selectedItems);
-
 	return (
-		<div className="card">
+		<>
+		<div className={`card ${error ? "border-danger" : ""}`}>
 			<input
 				type="hidden"
 				name={name}
@@ -235,6 +235,8 @@ const DataTable = (props) => {
 				</div>
 			</div>
 		</div>
+		{error ? <div className="text-danger">{error}</div>: null}
+		</>
 	);
 };
 

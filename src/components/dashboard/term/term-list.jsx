@@ -1,3 +1,4 @@
+"use client"
 import DataTable, { Column } from "@/components/common/form-fields/data-table";
 import Link from "next/link";
 import React from "react";
@@ -5,6 +6,7 @@ import { Container } from "react-bootstrap";
 import TermToolbar from "./term-toolbar";
 import { formatDateLL } from "@/helpers/date-time";
 import { config } from "@/helpers/config";
+import { formatTerm } from "@/helpers/misc";
 
 const TermList = ({ data }) => {
 	const { content, totalPages, number, size } = data;
@@ -13,12 +15,7 @@ const TermList = ({ data }) => {
 		return <TermToolbar row={row} />;
 	};
 
-	const formatTerm = (row) => {
-		const term = config.educationTerms.find(
-			(item) => item.value === row.term
-		);
-		return term.label;
-	};
+	
 
 	const formatStart = (row) => formatDateLL(row.startDate);
 	const formatEnd = (row) => formatDateLL(row.endDate);
@@ -31,6 +28,7 @@ const TermList = ({ data }) => {
 			</Link>
 
 			<DataTable
+				name="termList"
 				title="Term List"
 				dataSource={content}
 				dataKey="id"

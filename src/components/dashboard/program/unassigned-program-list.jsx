@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { assignProgramAction } from "@/actions/teacher-actions";
 import {
 	DataTable,
@@ -13,12 +13,19 @@ import { initialResponse } from "@/helpers/form-validation";
 import React from "react";
 import { useFormState } from "react-dom";
 import { Container, Form } from "react-bootstrap";
+import { swAlert } from "@/helpers/swal";
 
 const UnassignedProgramlist = ({ programs, teachers }) => {
 	const [state, dispatch] = useFormState(
 		assignProgramAction,
 		initialResponse
 	);
+
+	if (state.ok) {
+		swAlert(state.message, "success");
+	} else if (state.message) {
+		swAlert(state.message, "error");
+	}
 
 	const handleLessonNames = (row) => {
 		return row.lessonName.map((item) => item.lessonName).join("-");
@@ -36,11 +43,12 @@ const UnassignedProgramlist = ({ programs, teachers }) => {
 		<Container>
 			<Form noValidate action={dispatch}>
 				<DataTable
-          name="lessonProgramId"
+					name="lessonProgramId"
 					title="Unassigned programs"
 					dataSource={programs}
 					dataKey="lessonProgramId"
 					selectionMode="multiple"
+					error={state?.errors?.lessonProgramId}
 				>
 					<Column index={true}>#</Column>
 					<Column template={handleLessonNames}>Lessons</Column>
@@ -51,10 +59,11 @@ const UnassignedProgramlist = ({ programs, teachers }) => {
 
 				<div className="d-flex align-items-end gap-2 ">
 					<SelectInput
-            name="teacherId"
+						name="teacherId"
 						options={teachers}
 						label="Teacher"
 						defaultValue=""
+						error={state?.errors?.teacherId}
 					/>
 					<SubmitButton title="Assign" />
 				</div>

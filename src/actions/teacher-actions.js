@@ -6,8 +6,9 @@ import {
 	response,
 	transformYupErrors,
 } from "@/helpers/form-validation";
+import { ProgramAssignmentSchema } from "@/helpers/schemas/program-assignment-schema";
 import { TeacherSchema } from "@/helpers/schemas/teacher-schema";
-import { createTeacher, deleteTeacher, updateTeacher } from "@/services/teacher-service";
+import { assignProgramToTeacher, createTeacher, deleteTeacher, updateTeacher } from "@/services/teacher-service";
 import { revalidatePath } from "next/cache";
 
 export const createTeacherAction = async (prevState, formData) => {
@@ -86,19 +87,22 @@ export const assignProgramAction = async (prevState, formData) => {
 	try {
 		const fields = convertFormDataToJSON(formData);
 
-		console.log(fields)
+		ProgramAssignmentSchema.validateSync(fields, { abortEarly: false });
 
-		/* TeacherSchema.validateSync(fields, { abortEarly: false });
+		const payload = {
+			...fields,
+			lessonProgramId: JSON.parse(fields.lessonProgramId)
+		}
 
-		const res = await updateTeacher(fields);
+		const res = await assignProgramToTeacher(payload);
 		const data = await res.json();
 
 		if (!res.ok) {
 			return response(false, data?.message);
 		}
 
-		revalidatePath("/dashboard/teacher");
-		return response(true, "Teacher was updated"); */
+		revalidatePath("/dashboard/program");
+		return response(true, "Program was assigned");
 	} catch (err) {
 		if (err instanceof YupValidationError) {
 			return transformYupErrors(err.inner);

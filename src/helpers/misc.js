@@ -15,3 +15,8 @@ export const getTermValues = () => {
 export const getDayValues = () => {
 	return config.days.map((item) => item.value);
 };
+
+export const formatTerm = (val) => {
+	const term = config.educationTerms.find((item) => item.value === val.term);
+	return term.label;
+};

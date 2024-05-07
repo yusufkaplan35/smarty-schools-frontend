@@ -1,3 +1,4 @@
+"use client"
 import DataTable, { Column } from "@/components/common/form-fields/data-table";
 import Link from "next/link";
 import React from "react";
@@ -18,6 +19,7 @@ const AdminList = ({ data }) => {
 			</Link>
 
 			<DataTable
+				name="adminList"
 				title="Admin List"
 				dataSource={content}
 				dataKey="id"
