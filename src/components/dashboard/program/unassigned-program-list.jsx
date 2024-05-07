@@ -1,3 +1,5 @@
+"use client"
+import { assignProgramAction } from "@/actions/teacher-actions";
 import {
 	DataTable,
 	SelectInput,
@@ -7,10 +9,17 @@ import { Column } from "@/components/common/form-fields/data-table";
 import Spacer from "@/components/common/spacer";
 import { config } from "@/helpers/config";
 import { formatTimeLT } from "@/helpers/date-time";
+import { initialResponse } from "@/helpers/form-validation";
 import React from "react";
+import { useFormState } from "react-dom";
 import { Container, Form } from "react-bootstrap";
 
 const UnassignedProgramlist = ({ programs, teachers }) => {
+	const [state, dispatch] = useFormState(
+		assignProgramAction,
+		initialResponse
+	);
+
 	const handleLessonNames = (row) => {
 		return row.lessonName.map((item) => item.lessonName).join("-");
 	};
@@ -25,12 +34,13 @@ const UnassignedProgramlist = ({ programs, teachers }) => {
 
 	return (
 		<Container>
-			<Form>
+			<Form noValidate action={dispatch}>
 				<DataTable
+          name="lessonProgramId"
 					title="Unassigned programs"
 					dataSource={programs}
 					dataKey="lessonProgramId"
-          selectionMode="single"
+					selectionMode="multiple"
 				>
 					<Column index={true}>#</Column>
 					<Column template={handleLessonNames}>Lessons</Column>
@@ -41,6 +51,7 @@ const UnassignedProgramlist = ({ programs, teachers }) => {
 
 				<div className="d-flex align-items-end gap-2 ">
 					<SelectInput
+            name="teacherId"
 						options={teachers}
 						label="Teacher"
 						defaultValue=""

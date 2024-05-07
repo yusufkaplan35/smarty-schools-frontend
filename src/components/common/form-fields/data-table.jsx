@@ -1,12 +1,12 @@
+"use client";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 
 export const Column = ({ children }) => {
 	return <th scope="col">{children}</th>;
 };
 
 export const Row = ({ children, selectionMode }) => {
-
 	return <tr>{children}</tr>;
 };
 
@@ -109,6 +109,7 @@ const selectionModeTypes = ["single", "multiple", "none"];
 
 const DataTable = (props) => {
 	const {
+		name,
 		title,
 		dataSource,
 		dataKey,
@@ -119,24 +120,49 @@ const DataTable = (props) => {
 		pageSize = 0,
 	} = props;
 
+	const [selectedItems, setSelectedItems] = useState([]);
+
+	if (!name) throw new Error("Missing name for datatable");
+
 	if (!dataSource || !Array.isArray(dataSource))
-		throw new Error("dataSource attribute is required");
+		throw new Error("dataSource attribute is required for datatable");
 
-	if (!dataKey) throw new Error("dataKey attribute is required");
+	if (!dataKey)
+		throw new Error("dataKey attribute is required for datatable");
 
-	if (!children) throw new Error("Column required");
+	if (!children) throw new Error("Column required for datatable");
 
 	const columns = Array.isArray(children) ? [...children] : [children];
 
 	if (!selectionModeTypes.includes(selectionMode))
-		throw new Error("Invalid selection mode");
+		throw new Error("Invalid selection mode for datatable");
 
 	if (selectionMode !== "none") {
 		columns.splice(0, 0, <Column selectionMode={selectionMode}></Column>);
 	}
 
+	const handleSelectedItems = (e) => {
+		const val = e.target.value;
+		let arr = [...selectedItems];
+
+		if (!arr.includes(val)) {
+			arr.push(val);
+		} else {
+			arr = arr.filter((item) => item !== val);
+		}
+
+		setSelectedItems(arr);
+	};
+
+	console.log(selectedItems);
+
 	return (
 		<div className="card">
+			<input
+				type="hidden"
+				name={name}
+				value={JSON.stringify(selectedItems)}
+			/>
 			<div className="card-body">
 				<h3 className="card-title">{title}</h3>
 				<div className="table-responsive">
@@ -146,7 +172,10 @@ const DataTable = (props) => {
 						</thead>
 						<tbody>
 							{dataSource.map((row, rowIndex) => (
-								<Row key={row[dataKey]} selectionMode={selectionMode}>
+								<Row
+									key={row[dataKey]}
+									selectionMode={selectionMode}
+								>
 									{columns.map((cell) => {
 										const {
 											dataField,
@@ -179,6 +208,9 @@ const DataTable = (props) => {
 													name="rd"
 													className="form-check-input"
 													defaultValue={row[dataKey]}
+													onChange={
+														handleSelectedItems
+													}
 												/>
 											);
 										}

@@ -1,3 +1,4 @@
+"use client"
 import DataTable, { Column } from "@/components/common/form-fields/data-table";
 import { config } from "@/helpers/config";
 import { formatTimeLT } from "@/helpers/date-time";
@@ -35,6 +36,7 @@ const ProgramList = ({ data }) => {
 			</Link>
 
 			<DataTable
+				name="programList"
 				title="All programs"
 				dataSource={content}
 				dataKey="lessonProgramId"
