@@ -9,8 +9,6 @@ import ProgramToolbar from "./program-toolbar";
 const ProgramList = ({ data }) => {
 	const { content, totalPages, number, size } = data;
 
-	console.log(content);
-
 	const handleLessonNames = (row) => {
 		return row.lessonName.map((item) => item.lessonName).join("-");
 	};
@@ -47,7 +45,7 @@ const ProgramList = ({ data }) => {
 				<Column index={true}>#</Column>
 				<Column template={handleLessonNames}>Lessons</Column>
 				<Column template={handleDay}>Day</Column>
-				<Column template={handleTime}>Time</Column>
+				<Column template={handleTime}>Start/End</Column>
 				<Column template={handleToolbar}></Column>
 			</DataTable>
 		</Container>

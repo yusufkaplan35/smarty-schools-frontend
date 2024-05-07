@@ -5,7 +5,8 @@ export const Column = ({ children }) => {
 	return <th scope="col">{children}</th>;
 };
 
-export const Row = ({ children }) => {
+export const Row = ({ children, selectionMode }) => {
+
 	return <tr>{children}</tr>;
 };
 
@@ -104,12 +105,15 @@ export const Pagination = ({ totalPages, currentPage }) => {
 	);
 };
 
+const selectionModeTypes = ["single", "multiple", "none"];
+
 const DataTable = (props) => {
 	const {
 		title,
 		dataSource,
 		dataKey,
 		children,
+		selectionMode = "none", //single, multiple, none
 		totalPages = 0,
 		currentPage = 0,
 		pageSize = 0,
@@ -124,6 +128,13 @@ const DataTable = (props) => {
 
 	const columns = Array.isArray(children) ? [...children] : [children];
 
+	if (!selectionModeTypes.includes(selectionMode))
+		throw new Error("Invalid selection mode");
+
+	if (selectionMode !== "none") {
+		columns.splice(0, 0, <Column selectionMode={selectionMode}></Column>);
+	}
+
 	return (
 		<div className="card">
 			<div className="card-body">
@@ -131,14 +142,19 @@ const DataTable = (props) => {
 				<div className="table-responsive">
 					<table className="table table-striped">
 						<thead>
-							<tr>{children}</tr>
+							<tr>{columns}</tr>
 						</thead>
 						<tbody>
 							{dataSource.map((row, rowIndex) => (
-								<Row key={row[dataKey]}>
+								<Row key={row[dataKey]} selectionMode={selectionMode}>
 									{columns.map((cell) => {
-										const { dataField, index, template } =
-											cell.props;
+										const {
+											dataField,
+											index,
+											template,
+											selectionMode,
+										} = cell.props;
+
 										let cellData = "";
 										const cellKey =
 											row[dataKey] + dataField + cellData;
@@ -152,6 +168,19 @@ const DataTable = (props) => {
 											cellData = row[dataField];
 										} else if (template) {
 											cellData = template(row);
+										} else if (selectionMode !== "none") {
+											const inputType =
+												selectionMode === "single"
+													? "radio"
+													: "checkbox";
+											cellData = (
+												<input
+													type={inputType}
+													name="rd"
+													className="form-check-input"
+													defaultValue={row[dataKey]}
+												/>
+											);
 										}
 
 										return (
