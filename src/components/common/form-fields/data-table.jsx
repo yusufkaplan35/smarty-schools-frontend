@@ -6,8 +6,18 @@ export const Column = ({ children }) => {
 	return <th scope="col">{children}</th>;
 };
 
-export const Row = ({ children, selectionMode }) => {
-	return <tr>{children}</tr>;
+export const Row = ({ children, selectionMode, selected, onClick }) => {
+	const isSelectable = selectionMode !== "none";
+
+	return (
+		<tr
+			onClick={onClick}
+			className={isSelectable && selected ? "table-primary" : ""}
+			style={{ cursor: isSelectable ? "pointer" : "auto" }}
+		>
+			{children}
+		</tr>
+	);
 };
 
 export const Cell = ({ children }) => {
@@ -139,11 +149,15 @@ const DataTable = (props) => {
 		throw new Error("Invalid selection mode for datatable");
 
 	if (selectionMode !== "none") {
-		columns.splice(0, 0, <Column selectionMode={selectionMode}></Column>);
+		// Alltaki key="" uniqe key hatasini ortadan kaldirmak icin kullanildi
+		columns.splice(
+			0,
+			0,
+			<Column selectionMode={selectionMode} key=""></Column>
+		);
 	}
 
-	const handleSelectedItems = (e) => {
-		const val = e.target.value;
+	const handleSelectedItems = (val) => {
 		let arr = [...selectedItems];
 
 		if (!arr.includes(val)) {
@@ -155,87 +169,104 @@ const DataTable = (props) => {
 		setSelectedItems(arr);
 	};
 
+
 	return (
 		<>
-		<div className={`card ${error ? "border-danger" : ""}`}>
-			<input
-				type="hidden"
-				name={name}
-				value={JSON.stringify(selectedItems)}
-			/>
-			<div className="card-body">
-				<h3 className="card-title">{title}</h3>
-				<div className="table-responsive">
-					<table className="table table-striped">
-						<thead>
-							<tr>{columns}</tr>
-						</thead>
-						<tbody>
-							{dataSource.map((row, rowIndex) => (
-								<Row
-									key={row[dataKey]}
-									selectionMode={selectionMode}
-								>
-									{columns.map((cell) => {
-										const {
-											dataField,
-											index,
-											template,
-											selectionMode,
-										} = cell.props;
+			<div className={`card ${error ? "border-danger" : ""}`}>
+				<input
+					type="hidden"
+					name={name}
+					value={JSON.stringify(selectedItems)}
+				/>
+				<div className="card-body">
+					<h3 className="card-title">{title}</h3>
+					<div className="table-responsive">
+						<table className="table table-striped table-hover">
+							<thead>
+								<tr>{columns}</tr>
+							</thead>
+							<tbody>
+								{dataSource.map((row, rowIndex) => {
+									const id = row[dataKey];
 
-										let cellData = "";
-										const cellKey =
-											row[dataKey] + dataField + cellData;
+									const selected = selectedItems.includes(id);
 
-										if (index) {
-											cellData =
-												pageSize * currentPage +
-												rowIndex +
-												1;
-										} else if (dataField) {
-											cellData = row[dataField];
-										} else if (template) {
-											cellData = template(row);
-										} else if (selectionMode !== "none") {
-											const inputType =
-												selectionMode === "single"
-													? "radio"
-													: "checkbox";
-											cellData = (
-												<input
-													type={inputType}
-													name="rd"
-													className="form-check-input"
-													defaultValue={row[dataKey]}
-													onChange={
-														handleSelectedItems
-													}
-												/>
-											);
-										}
+									return (
+										<Row
+											key={id}
+											selectionMode={selectionMode}
+											selected={selected}
+											onClick={() =>
+												handleSelectedItems(id)
+											}
+										>
+											{columns.map((cell, colIndex) => {
+												const {
+													dataField,
+													index,
+													template,
+													selectionMode,
+												} = cell.props;
 
-										return (
-											<Cell key={cellKey}>
-												{cellData}
-											</Cell>
-										);
-									})}
-								</Row>
-							))}
-						</tbody>
-					</table>
+												let cellData = "";
+												const cellKey = `${id}-${colIndex}`;
 
-					{totalPages > 1 ? (
-						<Pagination
-							totalPages={totalPages}
-							currentPage={currentPage}
-						/>
-					) : null}
+												if (index) {
+													cellData =
+														pageSize * currentPage +
+														rowIndex +
+														1;
+												} else if (dataField) {
+													cellData = row[dataField];
+												} else if (template) {
+													cellData = template(row);
+												} else if (
+													selectionMode !== "none"
+												) {
+													const inputType =
+														selectionMode ===
+														"single"
+															? "radio"
+															: "checkbox";
+													cellData = (
+														<input
+															type={inputType}
+															name="rd"
+															className="form-check-input"
+															defaultValue={id}
+															onChange={(e) =>
+																handleSelectedItems(
+																	e.target
+																		.value
+																)
+															}
+															checked={selected}
+														/>
+													);
+												}
+
+												return (
+													<Cell key={cellKey}>
+														{cellData}
+													</Cell>
+												);
+											})}
+										</Row>
+									);
+								})}
+							</tbody>
+						</table>
+
+						{totalPages > 1 ? (
+							<Pagination
+								totalPages={totalPages}
+								currentPage={currentPage}
+							/>
+						) : null}
+					</div>
 				</div>
 			</div>
-		</div>
-		{error ? <div className="text-danger">{error}</div>: null}
+			{error ? <div className="text-danger">{error}</div> : null}
 		</>
 	);
 };

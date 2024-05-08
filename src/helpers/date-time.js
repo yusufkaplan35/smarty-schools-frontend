@@ -5,6 +5,10 @@ export const formatDateLL = (date) => {
     return moment(date).format("LL")
 }
 
+export const formatDateYM = (date) => {
+    return moment(date).format("YYYY MMM")
+}
+
 export const formatTimeLT = (time) => {
     return moment(time, "HH:mm:ss").format("HH:mm")
 }

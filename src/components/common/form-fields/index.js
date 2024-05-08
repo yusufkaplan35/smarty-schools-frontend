@@ -6,6 +6,7 @@ import SelectInput from "./select-input";
 import SubmitButton from "./submit-button";
 import TextInput from "./text-input";
 import Checkbox from "./checkbox";
+import MultiSelect from "./multi-select";
 
 
 export {
@@ -16,5 +17,6 @@ export {
 	SelectInput,
 	SubmitButton,
 	TextInput,
-	Checkbox
+	Checkbox,
+	MultiSelect
 };
