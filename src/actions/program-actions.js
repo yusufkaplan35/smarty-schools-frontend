@@ -13,12 +13,14 @@ import { revalidatePath } from "next/cache";
 export const createProgramAction = async (prevState, formData) => {
 	try {
 		const fields = convertFormDataToJSON(formData);
-
 		ProgramSchema.validateSync(fields, { abortEarly: false });
 
-		console.log(fields);
+		const payload = {
+			...fields,
+			lessonIdList: JSON.parse(fields.lessonIdList),
+		};
 
-		const res = await createProgram(fields);
+		const res = await createProgram(payload);
 		const data = await res.json();
 
 		if (!res.ok) {
