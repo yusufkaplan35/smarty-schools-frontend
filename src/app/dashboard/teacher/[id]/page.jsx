@@ -22,7 +22,7 @@ const TeacherEditPage = async ({ params }) => {
 		<>
 			<PageHeader>Edit Teacher</PageHeader>
 			<Spacer height={70} />
-			<TeacherEditForm teacher={teacher} programs={allPrograms} />
+			<TeacherEditForm teacher={teacher.object} programs={allPrograms} />
 			<Spacer />
 		</>
 	);

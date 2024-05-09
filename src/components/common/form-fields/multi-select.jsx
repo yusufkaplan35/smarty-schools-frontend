@@ -14,7 +14,11 @@ const MultiSelect = (props) => {
 		name,
 	} = props;
 
-	const [selectedItems, setSelectedItems] = useState([]);
+
+	const [selectedItems, setSelectedItems] = useState(
+		Array.isArray(values) ? [...values] : []
+	);
+
 
 	const handleChange = (e) => {
 		const val = e.target.value;
@@ -39,6 +43,10 @@ const MultiSelect = (props) => {
 			.join("-");
 
 		return label || "Choose";
+	};
+
+	const isChecked = (id) => {
+		return selectedItems.includes(id);
 	};
 
 	return (
@@ -69,15 +77,15 @@ const MultiSelect = (props) => {
 						style={{ maxHeight: "50vh" }}
 					>
 						{options.map((item) => (
-							<li
-								key={item[optionValue]}
-								className="px-3 py-1"
-							>
+							<li key={item[optionValue]} className="px-3 py-1">
 								<Form.Check // prettier-ignore
 									type="checkbox"
 									id={`chk-${item[optionValue]}`}
 									label={item[optionLabel]}
 									value={item[optionValue]}
+									defaultChecked={isChecked(
+										item[optionValue]
+									)}
 									className="w-100 d-block"
 									onChange={handleChange}
 								/>

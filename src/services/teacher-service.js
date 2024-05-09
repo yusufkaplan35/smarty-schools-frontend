@@ -38,7 +38,7 @@ export const createTeacher = async (payload) => {
 };
 
 export const updateTeacher = async (payload) => {
-	return fetch(`${API_URL}/teachers/update/${payload.userId}`, {
+	return fetch(`${API_URL}/teachers/update/${payload.id}`, {
 		method: "put",
 		body: JSON.stringify(payload),
 		headers: await getAuthHeader(),
