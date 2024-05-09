@@ -56,14 +56,23 @@ const MultiSelect = (props) => {
 							error ? "border-danger" : "border-light"
 						}`}
 					>
-						<div className="w-100 overflow-hidden">
+						<div
+							className="w-100 overflow-hidden"
+							style={{ textOverflow: "ellipsis" }}
+						>
 							{getTitleOfSelectedItems()}
 						</div>
 					</Dropdown.Toggle>
 
-					<Dropdown.Menu className="w-100">
+					<Dropdown.Menu
+						className="w-100 overflow-hidden  overflow-y-auto"
+						style={{ maxHeight: "50vh" }}
+					>
 						{options.map((item) => (
-							<li key={item[optionValue]} className="px-3 py-1">
+							<li
+								key={item[optionValue]}
+								className="px-3 py-1"
+							>
 								<Form.Check // prettier-ignore
 									type="checkbox"
 									id={`chk-${item[optionValue]}`}

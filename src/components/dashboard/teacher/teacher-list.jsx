@@ -22,7 +22,7 @@ const TeacherList = ({ data }) => {
 				name="teacherList"
 				title="Teacher List"
 				dataSource={content}
-				dataKey="id"
+				dataKey="userId"
 				totalPages={totalPages}
 				currentPage={number}
 				pageSize={size}

@@ -1,25 +1,31 @@
 import PageHeader from "@/components/common/page-header";
 import Spacer from "@/components/common/spacer";
-import ManagerEditForm from "@/components/dashboard/manager/manager-edit-form";
-import { getManagerById } from "@/services/manager-service";
+import TeacherEditForm from "@/components/dashboard/teacher/teacher-edit-form";
+import { getAllPrograms } from "@/services/program-service";
+import { getTeacherById } from "@/services/teacher-service";
 import React from "react";
 
-const ManagerEditPage = async ({ params }) => {
+const TeacherEditPage = async ({ params }) => {
 	if (!params.id) throw new Error("User id is missing");
 
-	const res = await getManagerById(params.id);
-	const data = await res.json();
+	const dataTeacher = (await getTeacherById(params.id)).json();
+	const dataPrograms = (await getAllPrograms()).json();
 
-	if (!res.ok) throw new Error(data.message);
+	const [teacher, programs] = await Promise.all([dataTeacher, dataPrograms]);
+
+	const allPrograms = programs.map((item) => ({
+		id: item.lessonProgramId,
+		label: item.lessonName.map((lesson) => lesson.lessonName).join("-"),
+	}));
 
 	return (
 		<>
-			<PageHeader>Edit Manager</PageHeader>
+			<PageHeader>Edit Teacher</PageHeader>
 			<Spacer height={70} />
-			<ManagerEditForm user={data.object} />
+			<TeacherEditForm teacher={teacher} programs={allPrograms} />
 			<Spacer />
 		</>
 	);
 };
 
-export default ManagerEditPage;
+export default TeacherEditPage;

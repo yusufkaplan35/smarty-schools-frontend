@@ -17,7 +17,7 @@ import React from "react";
 import { Card, Col, Container, Form, Row } from "react-bootstrap";
 import { useFormState } from "react-dom";
 
-const TeacherCreateForm = ({ lessons }) => {
+const TeacherCreateForm = ({ programs }) => {
 	const [state, dispatch] = useFormState(
 		createTeacherAction,
 		initialResponse
@@ -38,8 +38,8 @@ const TeacherCreateForm = ({ lessons }) => {
 					<Card.Title>New</Card.Title>
 
 					<Form noValidate action={dispatch}>
-						<Row xs={1} md={2} xl={3}>
-							<Col>
+						<Row  className="align-items-center">
+							<Col md={6} lg={4}>
 								<TextInput
 									type="text"
 									name="name"
@@ -48,7 +48,7 @@ const TeacherCreateForm = ({ lessons }) => {
 									error={state?.errors?.name}
 								/>
 							</Col>
-							<Col>
+							<Col md={6} lg={4}>
 								<TextInput
 									type="text"
 									name="surname"
@@ -57,7 +57,7 @@ const TeacherCreateForm = ({ lessons }) => {
 									error={state?.errors?.surname}
 								/>
 							</Col>
-							<Col>
+							<Col md={6} lg={4}>
 								<SelectInput
 									name="gender"
 									className="mb-3"
@@ -67,7 +67,7 @@ const TeacherCreateForm = ({ lessons }) => {
 									error={state?.errors?.gender}
 								/>
 							</Col>
-							<Col>
+							<Col md={6} lg={4}>
 								<TextInput
 									type="date"
 									name="birthDay"
@@ -76,7 +76,7 @@ const TeacherCreateForm = ({ lessons }) => {
 									error={state?.errors?.birthDay}
 								/>
 							</Col>
-							<Col>
+							<Col md={6} lg={4}>
 								<TextInput
 									type="text"
 									name="birthPlace"
@@ -85,7 +85,7 @@ const TeacherCreateForm = ({ lessons }) => {
 									error={state?.errors?.birthPlace}
 								/>
 							</Col>
-							<Col>
+							<Col md={6} lg={4}>
 								<MaskedInput
 									name="phoneNumber"
 									className="mb-3"
@@ -94,7 +94,7 @@ const TeacherCreateForm = ({ lessons }) => {
 									mask="999-999-9999"
 								/>
 							</Col>
-							<Col>
+							<Col md={6} lg={4}>
 								<MaskedInput
 									name="ssn"
 									className="mb-3"
@@ -103,7 +103,7 @@ const TeacherCreateForm = ({ lessons }) => {
 									mask="999-99-9999"
 								/>
 							</Col>
-							<Col>
+							<Col md={6} lg={4}>
 								<TextInput
 									type="email"
 									name="email"
@@ -112,7 +112,7 @@ const TeacherCreateForm = ({ lessons }) => {
 									error={state?.errors?.email}
 								/>
 							</Col>
-							<Col>
+							<Col md={6} lg={4}>
 								<Checkbox
 									name="isAdvisorTeacher"
 									label="Is Advisor Teacher"
@@ -120,19 +120,19 @@ const TeacherCreateForm = ({ lessons }) => {
 									error={state?.errors?.isAdvisorTeacher}
 								/>
 							</Col>
-							<Col>
+							<Col xs={12}>
 								<MultiSelect
 									name="lessonsIdList"
-									label="Lessons"
-									options={lessons}
-									optionValue="lessonId"
-									optionLabel="lessonName"
+									label="Programs"
+									options={programs}
+									optionValue="id"
+									optionLabel="label"
 									className="mb-3"
 									values=""
 									error={state?.errors?.lessonsIdList}
 								/>
 							</Col>
-							<Col>
+							<Col md={6} lg={4}>
 								<TextInput
 									type="text"
 									name="username"
@@ -141,7 +141,7 @@ const TeacherCreateForm = ({ lessons }) => {
 									error={state?.errors?.username}
 								/>
 							</Col>
-							<Col>
+							<Col md={6} lg={4}>
 								<TextInput
 									type="password"
 									name="password"
@@ -150,7 +150,7 @@ const TeacherCreateForm = ({ lessons }) => {
 									error={state?.errors?.password}
 								/>
 							</Col>
-							<Col>
+							<Col md={6} lg={4}>
 								<TextInput
 									type="password"
 									name="confirmPassword"

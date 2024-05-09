@@ -17,7 +17,14 @@ export const createTeacherAction = async (prevState, formData) => {
 
 		TeacherSchema.validateSync(fields, { abortEarly: false });
 
-		const res = await createTeacher(fields);
+		const payload = {
+			...fields,
+			lessonsIdList: JSON.parse(fields.lessonsIdList)
+		}
+
+		console.log(payload)
+
+		const res = await createTeacher(payload);
 		const data = await res.json();
 
 		if (!res.ok) {

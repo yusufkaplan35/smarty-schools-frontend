@@ -1,5 +1,6 @@
 import * as Yup from "yup";
 import { getGenderValues } from "../misc";
+import { isStringArray } from "../form-validation";
 
 const genders = getGenderValues();
 
@@ -19,7 +20,9 @@ export const TeacherSchema = Yup.object({
 		.required("Required"),
 	email: Yup.string().email("Invalid email").required("Required"),
 	username: Yup.string().required("Required"),
-	lessonsIdList: Yup.string().required("Required"),
+	lessonsIdList: Yup.string().test("isArray", "Required", (val) =>
+		isStringArray(val)
+	),
 	password: Yup.string()
 		.min(8, "Min 8 chars")
 		.matches(/[a-z]+/, "At least one lowercase")

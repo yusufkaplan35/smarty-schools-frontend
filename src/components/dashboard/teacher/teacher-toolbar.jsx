@@ -11,7 +11,7 @@ const TeacherToolbar = ({ row }) => {
 		const answer = await swConfirm("Are you sure to delete?");
 		if (!answer.isConfirmed) return;
 
-		const res = await deleteTeacherAction(row.id);
+		const res = await deleteTeacherAction(row.userId);
 		if (res.ok) {
 			swAlert(res.message, "success");
 		} else {
@@ -21,13 +21,15 @@ const TeacherToolbar = ({ row }) => {
 
 	return (
 		<>
-			<Link
-				className="btn text-info"
-				href={`/dashboard/teacher/${row.id}`}
+			<Button
+				as={Link}
+				variant="none"
+				className="btn-link text-info"
+				href={`/dashboard/teacher/${row.userId}`}
 			>
 				<TfiPencil />
-			</Link>
-			<Button variant="danger" onClick={handleDelete}>
+			</Button>
+			<Button className="btn-link" variant="none" onClick={handleDelete}>
 				<TfiTrash />
 			</Button>
 		</>
