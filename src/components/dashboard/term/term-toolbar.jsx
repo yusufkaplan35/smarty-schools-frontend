@@ -2,6 +2,7 @@
 import { deleteTermAction } from "@/actions/term-actions";
 import { swAlert, swConfirm } from "@/helpers/swal";
 import React from "react";
+import { Button } from "react-bootstrap";
 import { TfiTrash } from "react-icons/tfi";
 
 const TermToolbar = ({ row }) => {
@@ -18,9 +19,9 @@ const TermToolbar = ({ row }) => {
 	};
 
 	return (
-		<button className="btn text-danger" onClick={handleDelete}>
+		<Button className="btn-link" variant="none" onClick={handleDelete}>
 			<TfiTrash />
-		</button>
+		</Button>
 	);
 };
 

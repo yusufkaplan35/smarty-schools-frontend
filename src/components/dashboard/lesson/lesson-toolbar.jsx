@@ -19,7 +19,7 @@ const LessonToolbar = ({ row }) => {
 	};
 
 	return (
-		<Button variant="danger" onClick={handleDelete}>
+		<Button className="btn-link" variant="none" onClick={handleDelete}>
 			<TfiTrash />
 		</Button>
 	);

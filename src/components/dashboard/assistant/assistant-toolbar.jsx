@@ -21,13 +21,16 @@ const AssistantToolbar = ({ row }) => {
 
 	return (
 		<>
-			<Link
-				className="btn text-info"
+			<Button
+				as={Link}
+				variant="none"
+				className="btn-link text-info"
 				href={`/dashboard/assistant-manager/${row.userId}`}
 			>
 				<TfiPencil />
-			</Link>
-			<Button variant="danger" onClick={handleDelete}>
+			</Button>
+
+			<Button className="btn-link" variant="none" onClick={handleDelete}>
 				<TfiTrash />
 			</Button>
 		</>

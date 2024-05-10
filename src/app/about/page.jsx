@@ -4,6 +4,11 @@ import PageHeader from "@/components/common/page-header";
 import Spacer from "@/components/common/spacer";
 import React from "react";
 
+export const metadata = {
+	title: "About Us",
+	description: "Learn more about our school, mission, and values.",
+};
+
 const AboutPage = () => {
 	return (
 		<>

@@ -19,7 +19,7 @@ const ProgramToolbar = ({ row }) => {
 	};
 
 	return (
-		<Button variant="link" onClick={handleDelete}>
+		<Button className="btn-link" variant="none" onClick={handleDelete}>
 			<TfiTrash />
 		</Button>
 	);
