@@ -1,23 +1,31 @@
 import PageHeader from "@/components/common/page-header";
 import Spacer from "@/components/common/spacer";
-import StudentInfoCreateForm from "@/components/dashboard/student-info/student-info-create-form";
+import StudentInfoEditForm from "@/components/dashboard/student-info/student-info-edit-form";
 import { formatDateYM } from "@/helpers/date-time";
 import { formatTerm } from "@/helpers/misc";
 import { getAllLessons } from "@/services/lesson-service";
+import { getStudentInfoById } from "@/services/student-info-service";
 import { getAllStudentsForAdvisor } from "@/services/student-service";
 import { getAllTerms } from "@/services/term-service";
+import { notFound } from "next/navigation";
 import React from "react";
 
-const StudentInfoCreatePage = async () => {
+const StudentInfoEditPage = async ({ params }) => {
 	const studentsData = (await getAllStudentsForAdvisor()).json();
 	const lessonsData = (await getAllLessons()).json();
 	const termsData = (await getAllTerms()).json();
+	const studentInfoData = (await getStudentInfoById(params.id)).json();
 
-	const [students, lessons, terms] = await Promise.all([
+	const [students, lessons, terms, studentInfo] = await Promise.all([
 		studentsData,
 		lessonsData,
 		termsData,
+		studentInfoData,
 	]);
+
+	console.log("studentInfo:", studentInfo)
+
+	if(studentInfo.statusCode) notFound();
 
 	let newStudents = [];
 	let newLessons = [];
@@ -49,14 +57,15 @@ const StudentInfoCreatePage = async () => {
 		<>
 			<PageHeader>New Student</PageHeader>
 			<Spacer height={70} />
-			<StudentInfoCreateForm
+			<StudentInfoEditForm
 				students={newStudents}
 				lessons={newLessons}
 				terms={newTerms}
+				studentInfo={studentInfo}
 			/>
 			<Spacer />
 		</>
 	);
 };
 
-export default StudentInfoCreatePage;
+export default StudentInfoEditPage;

@@ -35,6 +35,7 @@ const StudentInfoEditForm = ({ studentInfo, students, lessons, terms }) => {
 					<Card.Title>Edit</Card.Title>
 
 					<Form noValidate action={dispatch}>
+						<input type="hidden" name="id" value={studentInfo.id} />
 						<Row xs={1} md={2} xl={3}>
 							<Col>
 								<SelectInput
