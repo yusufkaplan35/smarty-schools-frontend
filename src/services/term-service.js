@@ -6,7 +6,7 @@ const API_URL = config.api.baseUrl;
 
 export const getAllTermsByPage = async (
 	page = 0,
-	size = 4,
+	size = 20,
 	sort = "startDate",
 	type = "desc"
 ) => {

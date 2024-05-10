@@ -6,7 +6,7 @@ const API_URL = config.api.baseUrl;
 
 export const getAllAdminsByPage = async (
 	page = 0,
-	size = 4,
+	size = 20,
 	sort = "name",
 	type = "desc"
 ) => {

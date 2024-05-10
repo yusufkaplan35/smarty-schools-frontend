@@ -6,7 +6,7 @@ const API_URL = config.api.baseUrl;
 
 export const getAllLessonsByPage = async (
 	page = 0,
-	size = 4,
+	size = 20,
 	sort = "lessonName",
 	type = "desc"
 ) => {

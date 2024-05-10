@@ -51,15 +51,32 @@ export const PreviousPageButton = ({ currentPage }) => {
 };
 
 export const PageButton = ({ totalPages, currentPage }) => {
-	return [...new Array(totalPages)].map((_, index) => (
+	const totalAmountOfButtons = 5;
+	const averageOfTotalButtons = Math.floor(totalAmountOfButtons / 2);
+
+	
+
+	let startPage = Math.max(0, currentPage - averageOfTotalButtons);
+	const endPage = Math.min(totalPages, startPage + totalAmountOfButtons);
+
+	
+
+	if(currentPage + averageOfTotalButtons>= totalPages){
+		startPage = Math.max(0, totalPages - totalAmountOfButtons);
+	}
+
+	console.log("totalPages:",totalPages, "currentPage:", currentPage, "startPage:", startPage, "endPage:", endPage )
+
+
+	return [...new Array(endPage - startPage)].map((_, index) => (
 		<li className="page-item" key={index}>
 			<Link
 				className={`page-link ${
-					index === currentPage ? "disabled" : ""
+					index + startPage === currentPage ? "disabled" : ""
 				}`}
-				href={`?page=${index}`}
+				href={`?page=${startPage + index}`}
 			>
-				{index + 1}
+				{startPage + index + 1}
 			</Link>
 		</li>
 	));
@@ -168,7 +185,6 @@ const DataTable = (props) => {
 
 		setSelectedItems(arr);
 	};
-
 
 	return (
 		<>
