@@ -144,12 +144,15 @@ const DataTable = (props) => {
 		children,
 		error,
 		selectionMode = "none", //single, multiple, none
+		values,
 		totalPages = 0,
 		currentPage = 0,
 		pageSize = 0,
 	} = props;
 
-	const [selectedItems, setSelectedItems] = useState([]);
+	const [selectedItems, setSelectedItems] = useState(
+		Array.isArray(values) ? [...values] : []
+	);
 
 	if (!name) throw new Error("Missing name for datatable");
 
@@ -211,7 +214,9 @@ const DataTable = (props) => {
 								{dataSource.map((row, rowIndex) => {
 									const id = row[dataKey];
 
-									const selected = selectedItems.includes(id.toString());
+									const selected = selectedItems.includes(
+										id.toString()
+									);
 
 									return (
 										<Row
