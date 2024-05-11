@@ -6,8 +6,16 @@ import {
 	response,
 	transformYupErrors,
 } from "@/helpers/form-validation";
-import { StudentSchema } from "@/helpers/schemas/student-schema";
-import { createStudent, deleteStudent, updateStudent } from "@/services/student-service";
+import {
+	ChooseLessonScheme,
+	StudentSchema,
+} from "@/helpers/schemas/student-schema";
+import {
+	chooseLesson,
+	createStudent,
+	deleteStudent,
+	updateStudent,
+} from "@/services/student-service";
 import { revalidatePath } from "next/cache";
 
 export const createStudentAction = async (prevState, formData) => {
@@ -75,5 +83,35 @@ export const deleteStudentAction = async (id) => {
 		return response(true, "Student was deleted");
 	} catch (err) {
 		return response(false, err.message);
+	}
+};
+
+export const chooseLessonAction = async (prevState, formData) => {
+	try {
+		const fields = convertFormDataToJSON(formData);
+
+		console.log(fields)
+
+		ChooseLessonScheme.validateSync(fields, { abortEarly: false });
+
+		const payload = {
+			lessonProgramId: JSON.parse(fields.lessonProgramId),
+		};
+
+		const res = await chooseLesson(payload);
+		const data = await res.json();
+
+		if (!res.ok) {
+			return response(false, data?.message);
+		}
+
+		revalidatePath("/dashboard/choose-lesson");
+		return response(true, "The program was selected");
+	} catch (err) {
+		if (err instanceof YupValidationError) {
+			return transformYupErrors(err.inner);
+		}
+
+		throw err;
 	}
 };

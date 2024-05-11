@@ -11,6 +11,7 @@ const Icon = ({ family, icon, ...rest }) => {
 		bi: dynamic(() => import("react-icons/bi").then((item) => item[icon])),
 		md: dynamic(() => import("react-icons/md").then((item) => item[icon])),
 		fi: dynamic(() => import("react-icons/fi").then((item) => item[icon])),
+		gi: dynamic(() => import("react-icons/gi").then((item) => item[icon])),
 	};
 
 	const IconPlaceHolder = family && icon ? icons[family] : null;

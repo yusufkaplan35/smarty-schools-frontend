@@ -57,3 +57,11 @@ export const deleteStudent = async (id) => {
 		headers: await getAuthHeader(),
 	});
 };
+
+export const chooseLesson = async (payload) => {
+	return fetch(`${API_URL}/students/chooseLesson`, {
+		method: "post",
+		body: JSON.stringify(payload),
+		headers: await getAuthHeader(),
+	});
+};

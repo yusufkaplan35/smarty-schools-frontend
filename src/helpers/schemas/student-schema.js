@@ -1,5 +1,6 @@
 import * as Yup from "yup";
 import { getGenderValues } from "../misc";
+import { isStringArray } from "../form-validation";
 
 const genders = getGenderValues();
 
@@ -19,9 +20,9 @@ export const StudentSchema = Yup.object({
 		.required("Required"),
 	username: Yup.string().required("Required"),
 	email: Yup.string().email("Invalid email").required("Required"),
-	advisorTeacherId:Yup.string().required("Required"),
-	fatherName:Yup.string().required("Required"),
-	motherName:Yup.string().required("Required"),
+	advisorTeacherId: Yup.string().required("Required"),
+	fatherName: Yup.string().required("Required"),
+	motherName: Yup.string().required("Required"),
 	password: Yup.string()
 		.min(8, "Min 8 chars")
 		.matches(/[a-z]+/, "At least one lowercase")
@@ -31,5 +32,11 @@ export const StudentSchema = Yup.object({
 	confirmPassword: Yup.string().oneOf(
 		[Yup.ref("password")],
 		"Passwords don't match"
+	),
+});
+
+export const ChooseLessonScheme = Yup.object({
+	lessonProgramId: Yup.string().test("isArray", "Required", (val) =>
+		isStringArray(val)
 	),
 });

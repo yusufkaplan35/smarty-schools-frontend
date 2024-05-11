@@ -177,6 +177,7 @@ const DataTable = (props) => {
 
 	const handleSelectedItems = (val) => {
 		let arr = [...selectedItems];
+		val = val.toString();
 
 		if (!arr.includes(val)) {
 			arr.push(val);
@@ -210,7 +211,7 @@ const DataTable = (props) => {
 								{dataSource.map((row, rowIndex) => {
 									const id = row[dataKey];
 
-									const selected = selectedItems.includes(id);
+									const selected = selectedItems.includes(id.toString());
 
 									return (
 										<Row
@@ -254,7 +255,7 @@ const DataTable = (props) => {
 															type={inputType}
 															name="rd"
 															className="form-check-input"
-															defaultValue={id}
+															value={id}
 															onChange={(e) =>
 																handleSelectedItems(
 																	e.target
