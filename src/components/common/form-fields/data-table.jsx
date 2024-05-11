@@ -54,19 +54,12 @@ export const PageButton = ({ totalPages, currentPage }) => {
 	const totalAmountOfButtons = 5;
 	const averageOfTotalButtons = Math.floor(totalAmountOfButtons / 2);
 
-	
-
 	let startPage = Math.max(0, currentPage - averageOfTotalButtons);
 	const endPage = Math.min(totalPages, startPage + totalAmountOfButtons);
 
-	
-
-	if(currentPage + averageOfTotalButtons>= totalPages){
+	if (currentPage + averageOfTotalButtons >= totalPages) {
 		startPage = Math.max(0, totalPages - totalAmountOfButtons);
 	}
-
-	console.log("totalPages:",totalPages, "currentPage:", currentPage, "startPage:", startPage, "endPage:", endPage )
-
 
 	return [...new Array(endPage - startPage)].map((_, index) => (
 		<li className="page-item" key={index}>
@@ -129,6 +122,14 @@ export const Pagination = ({ totalPages, currentPage }) => {
 				/>
 			</ul>
 		</nav>
+	);
+};
+
+const NoRecordFound = ({ colLength }) => {
+	return (
+		<tr>
+			<td colSpan={colLength}>No records found</td>
+		</tr>
 	);
 };
 
@@ -202,6 +203,10 @@ const DataTable = (props) => {
 								<tr>{columns}</tr>
 							</thead>
 							<tbody>
+								{dataSource.length <= 0 ? (
+									<NoRecordFound colLength={columns.length} />
+								) : null}
+
 								{dataSource.map((row, rowIndex) => {
 									const id = row[dataKey];
 

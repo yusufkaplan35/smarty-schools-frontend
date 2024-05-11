@@ -59,6 +59,8 @@ const AdminCreateForm = () => {
 									label="Gender"
 									defaultValue=""
 									options={config.genders}
+									optionLabel="label"
+									optionValue="value"
 									error={state?.errors?.gender}
 								/>
 							</Col>

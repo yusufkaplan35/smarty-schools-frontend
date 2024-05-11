@@ -44,6 +44,8 @@ const StudentInfoEditForm = ({ studentInfo, students, lessons, terms }) => {
 									defaultValue={studentInfo.lessonId}
 									label="Lesson"
 									options={lessons}
+									optionLabel="lessonId"
+									optionValue="lessonName"
 									error={state?.errors?.lessonId}
 								/>
 							</Col>
@@ -54,6 +56,8 @@ const StudentInfoEditForm = ({ studentInfo, students, lessons, terms }) => {
 									defaultValue={studentInfo.studentId}
 									label="Student"
 									options={students}
+									optionLabel="label"
+									optionValue="value"
 									error={state?.errors?.studentId}
 								/>
 							</Col>
@@ -64,6 +68,8 @@ const StudentInfoEditForm = ({ studentInfo, students, lessons, terms }) => {
 									defaultValue={studentInfo.educationTermId}
 									label="Term"
 									options={terms}
+									optionLabel="label"
+									optionValue="value"
 									error={state?.errors?.educationTermId}
 								/>
 							</Col>

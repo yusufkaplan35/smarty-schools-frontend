@@ -62,6 +62,8 @@ const ManagerCreateForm = () => {
 									defaultValue=""
 									label="Gender"
 									options={config.genders}
+									optionLabel="label"
+									optionValue="value"
 									error={state?.errors?.gender}
 								/>
 							</Col>

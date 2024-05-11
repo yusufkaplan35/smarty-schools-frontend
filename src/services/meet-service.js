@@ -19,7 +19,7 @@ export const getAllMeetsForStudent = async () => {
 };
 
 export const getMeetById = async (id) => {
-	return fetch(`${API_URL}/meet/getMeetById${id}`, {
+	return fetch(`${API_URL}/meet/getMeetById/${id}`, {
 		headers: await getAuthHeader(),
 	});
 };

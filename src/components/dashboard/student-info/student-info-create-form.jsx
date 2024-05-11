@@ -42,6 +42,8 @@ const StudentInfoCreateForm = ({ students, lessons, terms }) => {
 									defaultValue=""
 									label="Lesson"
 									options={lessons}
+									optionLabel="lessonName"
+									optionValue="lessonId"
 									error={state?.errors?.lessonId}
 								/>
 							</Col>
@@ -52,6 +54,8 @@ const StudentInfoCreateForm = ({ students, lessons, terms }) => {
 									defaultValue=""
 									label="Student"
 									options={students}
+									optionLabel="label"
+									optionValue="value"
 									error={state?.errors?.studentId}
 								/>
 							</Col>
@@ -62,6 +66,8 @@ const StudentInfoCreateForm = ({ students, lessons, terms }) => {
 									defaultValue=""
 									label="Term"
 									options={terms}
+									optionLabel="label"
+									optionValue="value"
 									error={state?.errors?.educationTermId}
 								/>
 							</Col>

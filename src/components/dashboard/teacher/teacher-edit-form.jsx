@@ -79,6 +79,8 @@ const TeacherEditForm = ({ teacher, programs }) => {
 									defaultValue={teacher.gender}
 									label="Gender"
 									options={config.genders}
+									optionLabel="label"
+									optionValue="value"
 									error={state?.errors?.gender}
 								/>
 							</Col>

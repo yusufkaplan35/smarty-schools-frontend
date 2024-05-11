@@ -7,7 +7,7 @@ import {
 	transformYupErrors,
 } from "@/helpers/form-validation";
 import { MeetSchema } from "@/helpers/schemas/meet-schema";
-import { createMeet, updateMeet } from "@/services/meet-service";
+import { createMeet, deleteMeet, updateMeet } from "@/services/meet-service";
 import { revalidatePath } from "next/cache";
 
 export const createMeetAction = async (prevState, formData) => {
@@ -16,7 +16,12 @@ export const createMeetAction = async (prevState, formData) => {
 
 		MeetSchema.validateSync(fields, { abortEarly: false });
 
-		const res = await createMeet(fields);
+		const payload = {
+			...fields,
+			studentIds: JSON.parse(fields.studentIds),
+		};
+
+		const res = await createMeet(payload);
 		const data = await res.json();
 
 		if (!res.ok) {
@@ -42,7 +47,12 @@ export const updateMeetAction = async (prevState, formData) => {
 
 		MeetSchema.validateSync(fields, { abortEarly: false });
 
-		const res = await updateMeet(fields);
+		const payload = {
+			...fields,
+			studentIds: JSON.parse(fields.studentIds),
+		};
+
+		const res = await updateMeet(payload);
 		const data = await res.json();
 
 		if (!res.ok) {

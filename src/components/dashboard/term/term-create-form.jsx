@@ -41,6 +41,8 @@ const TermCreateForm = () => {
 									className="mb-3"
 									label="Term"
 									options={config.educationTerms}
+									optionLabel="label"
+									optionValue="value"
 									error={state?.errors?.term}
 								/>
 							</Col>

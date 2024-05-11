@@ -46,7 +46,7 @@ const MultiSelect = (props) => {
 	};
 
 	const isChecked = (id) => {
-		return selectedItems.includes(id);
+		return selectedItems.includes(id.toString());
 	};
 
 	return (

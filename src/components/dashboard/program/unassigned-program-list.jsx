@@ -61,6 +61,8 @@ const UnassignedProgramlist = ({ programs, teachers }) => {
 					<SelectInput
 						name="teacherId"
 						options={teachers}
+						optionLabel="label"
+						optionValue="value"
 						label="Teacher"
 						defaultValue=""
 						error={state?.errors?.teacherId}

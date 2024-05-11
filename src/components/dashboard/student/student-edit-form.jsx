@@ -65,6 +65,8 @@ const StudentEditForm = ({ student, advisorTeachers }) => {
 									className="mb-3"
 									label="Gender"
 									options={config.genders}
+									optionLabel="label"
+									optionValue="value"
 									error={state?.errors?.gender}
 									defaultValue={student.gender}
 								/>
@@ -147,6 +149,8 @@ const StudentEditForm = ({ student, advisorTeachers }) => {
 									defaultValue={student.advisorTeacherId}
 									label="Advisor"
 									options={advisorTeachers}
+									optionLabel="teacherName"
+									optionValue="advisorTeacherId"
 									error={state?.errors?.advisorTeacherId}
 								/>
 							</Col>

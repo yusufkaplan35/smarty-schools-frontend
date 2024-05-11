@@ -16,20 +16,13 @@ const StudentEditPage = async ({ params }) => {
 		dataAdvisorTeachers,
 	]);
 
-	const allAdvisorTeachers = advisorTeachers.map((item) => ({
-		value: item.advisorTeacherId,
-		label: item.teacherName,
-	}));
-
-	console.log(student)
-
 	return (
 		<>
 			<PageHeader>Edit Student</PageHeader>
 			<Spacer height={70} />
 			<StudentEditForm
 				student={student}
-				advisorTeachers={allAdvisorTeachers}
+				advisorTeachers={advisorTeachers}
 			/>
 			<Spacer />
 		</>

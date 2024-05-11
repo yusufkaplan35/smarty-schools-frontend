@@ -23,25 +23,15 @@ const StudentInfoEditPage = async ({ params }) => {
 		studentInfoData,
 	]);
 
-	console.log("studentInfo:", studentInfo)
-
-	if(studentInfo.statusCode) notFound();
+	if (studentInfo.statusCode) notFound();
 
 	let newStudents = [];
-	let newLessons = [];
 	let newTerms = [];
 
 	if (Array.isArray(students)) {
 		newStudents = students.map((item) => ({
 			label: `${item.name} ${item.surname}`,
 			value: item.userId,
-		}));
-	}
-
-	if (Array.isArray(lessons)) {
-		newLessons = lessons.map((item) => ({
-			label: item.lessonName,
-			value: item.lessonId,
 		}));
 	}
 
@@ -59,7 +49,7 @@ const StudentInfoEditPage = async ({ params }) => {
 			<Spacer height={70} />
 			<StudentInfoEditForm
 				students={newStudents}
-				lessons={newLessons}
+				lessons={lessons}
 				terms={newTerms}
 				studentInfo={studentInfo}
 			/>

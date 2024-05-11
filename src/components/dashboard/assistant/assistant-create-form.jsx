@@ -22,8 +22,6 @@ const AssistantCreateForm = () => {
 	const [state, dispatch] = useFormState(createAssistantAction, initialResponse);
 	const router = useRouter();
 
-	console.log("state", state)
-
 	if (state.ok) {
 		swAlert(state.message, "success");
 		router.push("/dashboard/assistant-manager");
@@ -64,6 +62,8 @@ const AssistantCreateForm = () => {
 									label="Gender"
 									defaultValue=""
 									options={config.genders}
+									optionLabel="label"
+									optionValue="value"
 									error={state?.errors?.gender}
 								/>
 							</Col>

@@ -10,18 +10,11 @@ const StudentCreatePage = async () => {
 
 	if (!res.ok) throw new Error(data?.message);
 
-	console.log(data);
-
-	const advisorTeachers = data.map((item) => ({
-		value: item.advisorTeacherId,
-		label: item.teacherName,
-	}));
-
 	return (
 		<>
 			<PageHeader>New Student</PageHeader>
 			<Spacer height={70} />
-			<StudentCreateForm advisorTeachers={advisorTeachers} />
+			<StudentCreateForm advisorTeachers={data} />
 			<Spacer />
 		</>
 	);

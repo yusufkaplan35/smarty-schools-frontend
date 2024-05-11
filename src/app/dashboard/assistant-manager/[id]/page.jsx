@@ -10,7 +10,7 @@ const AssistantEditPage = async ({ params }) => {
 	const res = await getAssistantById(params.id);
 	const data = await res.json();
 
-	if (!res.ok) throw new Error(data.message);
+	if (!res.ok) throw new Error(data);
 
 	return (
 		<>

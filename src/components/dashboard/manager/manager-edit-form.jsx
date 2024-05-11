@@ -65,6 +65,8 @@ const ManagerEditForm = ({ user }) => {
 									className="mb-3"
 									label="Gender"
 									options={config.genders}
+									optionLabel="label"
+									optionValue="value"
 									error={state?.errors?.gender}
 									defaultValue={user.gender}
 								/>

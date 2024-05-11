@@ -16,6 +16,7 @@ const ProgramPage = async ({ searchParams }) => {
 	const dataUnassignedPrograms = (await getAllUnAssignedPrograms()).json();
 	const dataTeachers = (await getAllTeachers()).json();
 
+
 	const [allPrograms, unassignedPrograms, teachers] = await Promise.all([
 		dataAllPrograms,
 		dataUnassignedPrograms,

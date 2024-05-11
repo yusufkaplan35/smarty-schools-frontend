@@ -20,7 +20,6 @@ const StudentInfoCreatePage = async () => {
 	]);
 
 	let newStudents = [];
-	let newLessons = [];
 	let newTerms = [];
 
 	if (Array.isArray(students)) {
@@ -30,12 +29,6 @@ const StudentInfoCreatePage = async () => {
 		}));
 	}
 
-	if (Array.isArray(lessons)) {
-		newLessons = lessons.map((item) => ({
-			label: item.lessonName,
-			value: item.lessonId,
-		}));
-	}
 
 	if (Array.isArray(terms)) {
 		newTerms = terms.map((item) => ({
@@ -51,7 +44,7 @@ const StudentInfoCreatePage = async () => {
 			<Spacer height={70} />
 			<StudentInfoCreateForm
 				students={newStudents}
-				lessons={newLessons}
+				lessons={lessons}
 				terms={newTerms}
 			/>
 			<Spacer />

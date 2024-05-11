@@ -1,8 +1,21 @@
-"use client"
+"use client";
 import React from "react";
 import { Form } from "react-bootstrap";
 
-const SelectInput = ({ className, options, error, label, ...rest }) => {
+const SelectInput = ({
+	className,
+	options,
+	optionValue,
+	optionLabel,
+	error,
+	label,
+	...rest
+}) => {
+	if (!Array.isArray(options))
+		throw new Error("Options must be array for SelectInput");
+	if (!optionValue) throw new Error("optionValue is missing for SelectInput");
+	if (!optionLabel) throw new Error("optionLabel is missing for SelectInput");
+
 	return (
 		<Form.Group className={className} controlId={rest.name}>
 			<Form.Label>{label}</Form.Label>
@@ -11,8 +24,8 @@ const SelectInput = ({ className, options, error, label, ...rest }) => {
 					Choose
 				</option>
 				{options.map((item) => (
-					<option key={item.value} value={item.value}>
-						{item.label}
+					<option key={item[optionValue]} value={item[optionValue]}>
+						{item[optionLabel]}
 					</option>
 				))}
 			</Form.Select>

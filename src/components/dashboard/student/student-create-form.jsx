@@ -62,6 +62,8 @@ const StudentCreateForm = ({ advisorTeachers }) => {
 									defaultValue=""
 									label="Gender"
 									options={config.genders}
+									optionLabel="label"
+									optionValue="value"
 									error={state?.errors?.gender}
 								/>
 							</Col>
@@ -136,6 +138,8 @@ const StudentCreateForm = ({ advisorTeachers }) => {
 									defaultValue=""
 									label="Advisor"
 									options={advisorTeachers}
+									optionLabel="teacherName"
+									optionValue="advisorTeacherId"
 									error={state?.errors?.advisorTeacherId}
 								/>
 							</Col>

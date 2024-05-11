@@ -1,13 +1,11 @@
 "use client";
-import { createProgramAction } from "@/actions/program-actions";
+import { createMeetAction } from "@/actions/meet-actions";
 import {
 	BackButton,
 	MultiSelect,
-	SelectInput,
 	SubmitButton,
 	TextInput,
 } from "@/components/common/form-fields";
-import { config } from "@/helpers/config";
 import { initialResponse } from "@/helpers/form-validation";
 import { swAlert } from "@/helpers/swal";
 import { useRouter } from "next/navigation";
@@ -15,16 +13,13 @@ import React from "react";
 import { Card, Col, Container, Form, Row } from "react-bootstrap";
 import { useFormState } from "react-dom";
 
-const ProgramCreateForm = ({ terms, lessons }) => {
-	const [state, dispatch] = useFormState(
-		createProgramAction,
-		initialResponse
-	);
+const MeetCreateForm = ({ students }) => {
+	const [state, dispatch] = useFormState(createMeetAction, initialResponse);
 	const router = useRouter();
 
 	if (state.ok) {
 		swAlert(state.message, "success");
-		router.push("/dashboard/program");
+		router.push("/dashboard/meet");
 	} else if (state.message) {
 		swAlert(state.message, "error");
 	}
@@ -36,59 +31,53 @@ const ProgramCreateForm = ({ terms, lessons }) => {
 					<Card.Title>New</Card.Title>
 
 					<Form noValidate action={dispatch}>
-						<Row xs={1} md={2} xl={3}>
-							<Col>
+						<Row className="align-items-center">
+							<Col xs={12}>
 								<MultiSelect
-									name="lessonIdList"
-									label="Lessons"
-									options={lessons}
-									optionValue="lessonId"
-									optionLabel="lessonName"
+									name="studentIds"
+									label="Students"
+									options={students}
+									optionValue="value"
+									optionLabel="label"
 									className="mb-3"
 									values=""
-									error={state?.errors?.lessonIdList}
+									error={state?.errors?.studentIds}
 								/>
 							</Col>
-							<Col>
-								<SelectInput
-									name="educationTermId"
+							<Col md={6} lg={4}>
+								<TextInput
+									type="date"
+									name="date"
 									className="mb-3"
-									defaultValue=""
-									label="Term"
-									options={terms}
-									optionLabel="label"
-									optionValue="value"
-									error={state?.errors?.educationTermId}
+									label="Date"
+									error={state?.errors?.date}
 								/>
 							</Col>
-							<Col>
-								<SelectInput
-									name="day"
-									className="mb-3"
-									defaultValue=""
-									label="Day"
-									options={config.days}
-									optionLabel="label"
-									optionValue="value"
-									error={state?.errors?.day}
-								/>
-							</Col>
-							<Col>
+							<Col md={6} lg={4}>
 								<TextInput
 									type="time"
 									name="startTime"
 									className="mb-3"
-									label="Start time"
+									label="Start"
 									error={state?.errors?.startTime}
 								/>
 							</Col>
-							<Col>
+							<Col md={6} lg={4}>
 								<TextInput
 									type="time"
 									name="stopTime"
 									className="mb-3"
-									label="End time"
+									label="End"
 									error={state?.errors?.stopTime}
+								/>
+							</Col>
+							<Col md={6} lg={4}>
+								<TextInput
+									type="text"
+									name="description"
+									className="mb-3"
+									label="Description"
+									error={state?.errors?.description}
 								/>
 							</Col>
 						</Row>
@@ -100,4 +89,4 @@ const ProgramCreateForm = ({ terms, lessons }) => {
 	);
 };
 
-export default ProgramCreateForm;
+export default MeetCreateForm;

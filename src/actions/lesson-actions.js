@@ -35,7 +35,7 @@ export const createLessonAction = async (prevState, formData) => {
 };
 
 export const deleteLessonAction = async (id) => {
-	console.log(id)
+
 	if (!id) throw new Error("Id is missing");
 
 	try {
