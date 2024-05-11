@@ -1,10 +1,13 @@
 import PageHeader from "@/components/common/page-header";
 import Spacer from "@/components/common/spacer";
 import AdminList from "@/components/dashboard/admin/admin-list";
+import { wait } from "@/helpers/misc";
 import { getAllAdminsByPage } from "@/services/admin-service";
 import React from "react";
 
 const AdminPage = async ({searchParams}) => {
+await wait(5)
+
   const { page } = searchParams;
 
 	const res = await getAllAdminsByPage(page);

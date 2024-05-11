@@ -2,6 +2,7 @@ import PageHeader from "@/components/common/page-header";
 import Spacer from "@/components/common/spacer";
 import AllProgramList from "@/components/dashboard/choose-lesson/all-program-list";
 import StudentProgramList from "@/components/dashboard/choose-lesson/student-program-list";
+import { wait } from "@/helpers/misc";
 import {
 	getAllPrograms,
 	getAllProgramsByStudent,
@@ -9,6 +10,10 @@ import {
 import React from "react";
 
 const ChooseLessonPage = async () => {
+
+	await wait(5);
+
+
 	const dataAllPrograms = (await getAllPrograms()).json();
 	const dataStudentPrograms = (await getAllProgramsByStudent()).json();
 
