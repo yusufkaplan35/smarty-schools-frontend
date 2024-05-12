@@ -22,7 +22,7 @@ const AssistantList = ({ data }) => {
 				name="assistantList"
 				title="Assistant List"
 				dataSource={content}
-				dataKey="id"
+				dataKey="userId"
 				totalPages={totalPages}
 				currentPage={number}
 				pageSize={size}

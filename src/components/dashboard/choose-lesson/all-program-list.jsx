@@ -6,15 +6,14 @@ import Spacer from "@/components/common/spacer";
 import { formatTimeLT } from "@/helpers/date-time";
 import { initialResponse } from "@/helpers/form-validation";
 import { capitalizeFirstLetter } from "@/helpers/misc";
-import React from "react";
+import React, { createRef, useEffect } from "react";
 import { useFormState } from "react-dom";
 import { Container, Form } from "react-bootstrap";
 import { swAlert } from "@/helpers/swal";
-import { useRouter } from "next/navigation";
 
 const AllProgramList = ({ allPrograms }) => {
 	const [state, dispatch] = useFormState(chooseLessonAction, initialResponse);
-    const router = useRouter();
+	const refDataTable = createRef();
 
 	const handleLessonNames = (row) => {
 		return row.lessonName.map((item) => item.lessonName).join("-");
@@ -32,11 +31,15 @@ const AllProgramList = ({ allPrograms }) => {
 		return `${formatTimeLT(row.startTime)} - ${formatTimeLT(row.stopTime)}`;
 	};
 
-    if (state.ok) {
-		swAlert(state.message, "success");
-	} else if (state.message) {
-		swAlert(state.message, "error");
-	}
+	useEffect(() => {
+		if (state.ok) {
+			swAlert(state.message, "success");
+			refDataTable.current.value = null;
+			
+		} else if (state.message) {
+			swAlert(state.message, "error");
+		}
+	}, [state]);
 
 	return (
 		<Container>
@@ -47,7 +50,8 @@ const AllProgramList = ({ allPrograms }) => {
 					dataSource={allPrograms}
 					dataKey="lessonProgramId"
 					selectionMode="multiple"
-                    values={[]}
+					ref={refDataTable}
+					error={state?.errors?.lessonProgramId}
 				>
 					<Column template={handleLessonNames}>Program</Column>
 					<Column template={handleTeacherNames}>Teacher</Column>

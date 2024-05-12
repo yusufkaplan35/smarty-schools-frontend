@@ -17,6 +17,10 @@ const StudentInfoList = ({ data }) => {
 		return `${name} ${surname}`;
 	};
 
+	const handleAverage = (row) => { 
+		return row.average.toFixed(2)
+	 }
+
 	return (
 		<Container>
 			<Link
@@ -41,7 +45,7 @@ const StudentInfoList = ({ data }) => {
 				<Column dataField="absentee">Absentee</Column>
 				<Column dataField="midtermExam">Midterm</Column>
 				<Column dataField="finalExam">Final</Column>
-				<Column dataField="average">Average</Column>
+				<Column template={handleAverage}>Average</Column>
 				<Column dataField="note">Note</Column>
 				<Column dataField="infoNote">Info</Column>
 				<Column template={handleToolbar}></Column>

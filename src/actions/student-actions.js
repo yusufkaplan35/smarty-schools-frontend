@@ -90,8 +90,6 @@ export const chooseLessonAction = async (prevState, formData) => {
 	try {
 		const fields = convertFormDataToJSON(formData);
 
-		console.log(fields)
-
 		ChooseLessonScheme.validateSync(fields, { abortEarly: false });
 
 		const payload = {

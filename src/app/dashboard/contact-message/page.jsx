@@ -16,7 +16,7 @@ const ContactMessagePage = async ({ searchParams }) => {
 
 	return (
 		<>
-			<PageHeader>Admin</PageHeader>
+			<PageHeader>Messages</PageHeader>
 			<Spacer height={70} />
 			<ContactMessageList data={data} />
 			<Spacer />

@@ -34,7 +34,7 @@ const AssistantEditForm = ({ user }) => {
 		<Container>
 			<Card>
 				<Card.Body>
-					<Card.Title>New</Card.Title>
+					<Card.Title>Edit</Card.Title>
 
 					<Form noValidate action={dispatch}>
 						<input type="hidden" name="id" value={user.userId}/>

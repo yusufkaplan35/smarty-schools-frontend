@@ -6,11 +6,9 @@ import React from 'react'
 const Loading = () => {
   return (
     <>
-			<PageHeader>Choose Program</PageHeader>
+			<PageHeader>Meet</PageHeader>
 			<Spacer height={70} />
-			<LoadingList title="All Programs" rowCount={6} colCount={4} showButton={false}/>
-			<Spacer />
-			<LoadingList title="Student Programs" rowCount={6} colCount={4}/>
+			<LoadingList title="Meet List" rowCount={6} colCount={5} showButton={true}/>
 			<Spacer />
 		</>
   )

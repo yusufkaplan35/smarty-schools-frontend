@@ -135,7 +135,7 @@ const NoRecordFound = ({ colLength }) => {
 
 const selectionModeTypes = ["single", "multiple", "none"];
 
-const DataTable = (props) => {
+const DataTable = React.forwardRef((props, ref) => {
 	const {
 		name,
 		title,
@@ -191,10 +191,13 @@ const DataTable = (props) => {
 		setSelectedItems(arr);
 	};
 
+	console.log("selectedItems:", selectedItems);
+
 	return (
 		<>
 			<div className={`card ${error ? "border-danger" : ""}`}>
 				<input
+					ref={ref}
 					type="hidden"
 					name={name}
 					value={JSON.stringify(selectedItems)}
@@ -296,6 +299,6 @@ const DataTable = (props) => {
 			{error ? <div className="text-danger">{error}</div> : null}
 		</>
 	);
-};
+});
 
 export default DataTable;

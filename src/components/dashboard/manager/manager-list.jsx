@@ -22,7 +22,7 @@ const ManagerList = ({ data }) => {
 				name="managerList"
 				title="Manager List"
 				dataSource={content}
-				dataKey="id"
+				dataKey="userId"
 				totalPages={totalPages}
 				currentPage={number}
 				pageSize={size}

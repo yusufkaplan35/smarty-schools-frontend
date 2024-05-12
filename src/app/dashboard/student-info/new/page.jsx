@@ -2,13 +2,15 @@ import PageHeader from "@/components/common/page-header";
 import Spacer from "@/components/common/spacer";
 import StudentInfoCreateForm from "@/components/dashboard/student-info/student-info-create-form";
 import { formatDateYM } from "@/helpers/date-time";
-import { formatTerm } from "@/helpers/misc";
+import { formatTerm, wait } from "@/helpers/misc";
 import { getAllLessons } from "@/services/lesson-service";
 import { getAllStudentsForAdvisor } from "@/services/student-service";
 import { getAllTerms } from "@/services/term-service";
 import React from "react";
 
 const StudentInfoCreatePage = async () => {
+	
+
 	const studentsData = (await getAllStudentsForAdvisor()).json();
 	const lessonsData = (await getAllLessons()).json();
 	const termsData = (await getAllTerms()).json();
@@ -40,7 +42,7 @@ const StudentInfoCreatePage = async () => {
 
 	return (
 		<>
-			<PageHeader>New Student</PageHeader>
+			<PageHeader>New Info</PageHeader>
 			<Spacer height={70} />
 			<StudentInfoCreateForm
 				students={newStudents}

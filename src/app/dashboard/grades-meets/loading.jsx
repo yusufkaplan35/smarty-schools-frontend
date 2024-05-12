@@ -6,11 +6,11 @@ import React from 'react'
 const Loading = () => {
   return (
     <>
-			<PageHeader>Choose Program</PageHeader>
+			<PageHeader>Grades &amp; Meets</PageHeader>
 			<Spacer height={70} />
-			<LoadingList title="All Programs" rowCount={6} colCount={4} showButton={false}/>
+			<LoadingList title="Grades" rowCount={6} colCount={7} showButton={false}/>
 			<Spacer />
-			<LoadingList title="Student Programs" rowCount={6} colCount={4}/>
+			<LoadingList title="Meets" rowCount={6} colCount={4}/>
 			<Spacer />
 		</>
   )

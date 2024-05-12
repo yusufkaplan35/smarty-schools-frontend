@@ -26,8 +26,6 @@ const MeetEditForm = ({ meet, currentStudentIds, allStudents }) => {
 		swAlert(state.message, "error");
 	}
 
-	console.log(meet, currentStudentIds)
-
 	return (
 		<Container>
 			<Card>
